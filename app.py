@@ -14,11 +14,13 @@ nltk.download = safe_download
 
 import nltk
 import os
+import streamlit as st
 
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
 
-openai_key = os.getenv("OPENAI_API_KEY")
+# Use Streamlit secrets fallback for OpenAI API key
+openai_key = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY", None)
 
 if not openai_key:
     raise ValueError("Missing OpenAI API key. Make sure it is set in Streamlit secrets.")
