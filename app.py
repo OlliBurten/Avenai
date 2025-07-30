@@ -1,6 +1,15 @@
 import nltk
 import os
 
+from llama_index.embeddings.openai import OpenAIEmbedding
+from llama_index.core import Settings
+
+import os
+Settings.embed_model = OpenAIEmbedding(
+    model="text-embedding-ada-002",
+    api_key=os.getenv("OPENAI_API_KEY")
+)
+
 nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
 os.makedirs(nltk_data_dir, exist_ok=True)
 nltk.data.path.append(nltk_data_dir)
