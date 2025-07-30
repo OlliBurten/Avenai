@@ -1,0 +1,13 @@
+[2025-07-30 18:30:51]
+Q: how long does it take to implement mdmx api
+A: The implementation of the MDMX API typically involves obtaining client credentials during API onboarding, encoding them in base64 format, retrieving a token from Okta, and using this token for all API requests. It is recommended to implement a caching mechanism to avoid requesting a new token with every API call. The token obtained is valid for one hour.
+Sources:
+- G2 - MDMX API Implementation Guide 1.pdf
+
+[2025-07-30 18:33:34]
+Q: what can I do with the mdmx api
+A: You can use the MDMX API to manage your G2 Risk Solutions (G2RS) merchant monitoring portfolio. This includes submitting merchants for monitoring, updating merchant attributes, and removing merchants from monitoring. The API integration allows you to streamline the process of providing and updating merchants within G2RS' system using your own internal platforms or tools. Additionally, integrating with the MDMX API can enhance risk analyst efficiency by eliminating the need for portal-based file uploads.
+Sources:
+- G2 - MDMX API Implementation Guide 1.pdf
+- query_log.txt
+

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avenai – AI-Powered API Onboarding</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0e0e2c;
+      color: #f4f4f4;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    header {
+      background: radial-gradient(ellipse at center, #1f1f5e 0%, #0e0e2c 100%);
+      padding: 100px 20px 60px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #6c47ff 0%, #a96bff 100%);
+      box-shadow: 0 0 10px rgba(172, 111, 255, 0.4);
+      color: #fff;
+      padding: 14px 28px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #8d66ff;
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    p, li, blockquote {
+      font-size: 1.05rem;
+      color: #ddd;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 500px;
+      border-radius: 10px;
+      border: 1px solid #2e2e60;
+      margin-top: 30px;
+    }
+
+    .pricing {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .pricing-card {
+      background: #1c1c3c;
+      border: 2px solid #30306e;
+      padding: 30px;
+      border-radius: 12px;
+      width: 300px;
+      color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .pricing-card.featured {
+      border-color: #6c47ff;
+      box-shadow: 0 0 20px rgba(108, 71, 255, 0.5);
+    }
+
+    .pricing-card:hover {
+      transform: scale(1.05);
+    }
+
+    input[type="email"] {
+      padding: 12px;
+      font-size: 1rem;
+      width: 60%;
+      border: none;
+      border-radius: 6px;
+      margin-right: 10px;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      background: #0b0b22;
+      color: #888;
+    }
+
+    a {
+      color: #6c47ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    blockquote {
+      border-left: 4px solid #6c47ff;
+      padding-left: 16px;
+      font-style: italic;
+      background: #1a1a39;
+      margin: 20px 0;
+    }
+
+    .glass-block {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="glass" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+      <img src="/mnt/data/A_digital_vector_graphic_features_the_logo_for_Ave.png" width="40" alt="Avenai Logo"/>
+      <h1 style="margin: 0;">Avenai</h1>
+    </div>
+    <p>Your AI-powered avenue to faster onboarding and smarter integrations.</p>
+    <a href="#demo"><button>Try the Demo</button></a>
+  </header>
+
+  <section>
+    <div class="glass-block">
+      <h2>The Problem</h2>
+      <ul>
+        <li>API docs are overwhelming and hard to navigate</li>
+        <li>Support teams repeat the same answers over and over</li>
+        <li>Integration delays cost time, trust, and revenue</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass-block">
+      <h2>The Solution</h2>
+      <ul>
+        <li>Upload your API docs</li>
+        <li>Onbo instantly answers developer and CS questions</li>
+        <li>Query history, session/version isolation, usage tracking</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="demo">
+    <div class="glass-block">
+      <h2>Live Demo</h2>
+      <p>Test Avenai with your own API documentation or try our sample.</p>
+      <a href="https://onbo-assistant.streamlit.app" target="_blank">
+        <button>Launch Demo in New Tab</button>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>What You Get</h2>
+    <ul>
+      <li>Multi-document support (.pdf, .txt)</li>
+      <li>Real-time Q&A with source tracking</li>
+      <li>Session + version isolation</li>
+      <li>Query logs, limits, and analytics</li>
+      <li>Billing-ready architecture</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What People Say</h2>
+    <blockquote>"Cut our onboarding time in half. This is our new first responder." – SaaS CTO</blockquote>
+    <blockquote>"Clients are up and running in days instead of weeks. Love it." – Implementation Manager</blockquote>
+  </section>
+
+  <section>
+    <h2>Pricing</h2>
+    <p>Start free. Upgrade when you're ready.</p>
+    <div class="pricing">
+      <div class="pricing-card">
+        <h3>Free</h3>
+        <p>20 queries per session</p>
+        <ul><li>Single user</li><li>Local agent</li></ul>
+        <button>Start Free</button>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Pro</h3>
+        <p>Unlimited queries</p>
+        <ul><li>Team access</li><li>Analytics</li><li>Priority support</li></ul>
+        <button>Upgrade</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Stay in the Loop</h2>
+    <form action="https://your-mailing-list-or-stripe-url.com" method="POST">
+      <input type="email" name="email" placeholder="Your email">
+      <button type="submit">Join the Waitlist</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 Avenai · Built by Oliver Harburt · <a href="#">Privacy</a> · <a href="#">Terms</a>
+  </footer>
+</body>
+</html>

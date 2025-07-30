@@ -1,0 +1,1345 @@
+ 
+833
+-
+65 3
+-
+6618
+ 
+| 
+www.
+g
+2risksolution
+s
+.com
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+Monitoring API Impleme ntation Guide 
+(PMM/TLD)
+ 
+Last 
+u
+pdated: 
+February
+ 
+202
+4
+ 
+
+
+ 
+ 
+2
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+ 
+Ta bl e of contents
+ 
+ 
+vı„} ˆµ}v
+ 
+................................
+................................
+................................
+................................
+.........
+ 
+3
+ 
+Quick start
+ 
+................................
+................................
+................................
+................................
+...........
+ 
+3
+ 
+µıZ˚v}v
+ 
+................................
+................................
+................................
+................................
+.....
+ 
+3
+ 
+S ample using spring boot security  with web client
+ 
+................................
+................................
+.........
+ 
+4
+ 
+Request ty pes summary
+ 
+................................
+................................
+................................
+......................
+ 
+6
+ 
+Status co des
+Š
+P˚v˚„o~’˚˚’ÁPP˚„(}„’›˚].u˚’’P˚˚Æu›o ˚’
+ 
+................................
+................
+ 
+8
+ 
+Commonly gro uped requests
+ 
+................................
+................................
+................................
+..............
+ 
+8
+ 
+Case study
+ 
+................................
+................................
+................................
+................................
+.......
+ 
+9
+ 
+ µ››oÇ] vu˚„Zvı] v(} „u}v
+ 
+................................
+................................
+................................
+.....
+ 
+9
+ 
+l v}. } v’Á˚Z}} l
+ 
+................................
+................................
+................................
+.....
+ 
+10
+ 
+Perfo rmance
+ 
+................................
+................................
+................................
+................................
+......
+ 
+11
+ 
+ vˆ}Æ˚vÀ]„} vu˚vı
+ 
+................................
+................................
+................................
+.......................
+ 
+12
+ 
+ 
+ 
+ 
+
+
+ 
+ 
+3
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+Introduction
+ 
+ 
+The G2
+ 
+Risk So lutions ( G2
+RS
+)
+ 
+Monito ring API sup ports P
+ersistent 
+M
+erchant 
+M
+oni toring (PMM)
+ 
+and 
+T
+ransaction 
+L
+aundering 
+D
+etection ( TLD)
+ 
+workflo ws via custo mer
+-
+facing API. Thi s inclu des receiving 
+PM M/TLD cases, actio ning cases, requ esting a TLD investigatio n, repo rting back a test transaction 
+decli ne, and searching the G2
+RS
+ 
+merchant case history f or a moni to red merchant. API integration 
+oo} Á’’ı}u˚„’ ˚ o˚Æ] ]o]ıÇı} ]˚Ávˆı]}vî
+RS
+ 
+cases within their own internal 
+platforms/to ols and can increase risk analy
+st ef ficiency by reducing the number o f systems that 
+users need to log into .
+ 
+ 
+Quick start
+ 
+ 
+The most d etailed do cumentatio n fo r th e M o nitoring ( PMM/ TLD)  API is also  available via a 
+S wagger UI. You can visualize and interact wi th the APIs by navigating to: 
+ 
+https://api
+-
+’vˆ}ÆXPîv˚ıÀ ]˚ÁX} ul›uuıoˆl ’ÁPP˚„
+-
+µ]l ]vˆ˚ÆXZıuo
+ 
+ 
+’Z]PZoÇ ˚}uu˚vˆ˚ˆ ı} vı˚P „ı˚vˆ˚’ ]„’ıÁ]ıZµ„Çv u]vˆ} Æ } „oo˚‰µ˚’ı’
+yo ur organization plans to utilize bef o re moving to productio n. This is a precauti o n to avo id 
+
+interf ering wi th your prod uction  dataset. Please see the sectio
+n at the end of this guide for more 
+inf ormation o n 
+G2RS '
+ 
+ l’vˆ }
+ 
+ vˆ}ÆW
+https://api
+-
+’vˆ}ÆXPîv˚ıÀ]˚ÁX}ul›uuıo ˆl
+  
+ 
+Production URL: 
+https:/ / api.g2netview.com/ pmmtld/
+ 
+ 
+Authentication
+ 
+ 
+The G2RS M onito ring API facilitates  machine
+-
+to
+-
+mach ine communi catio n via OAuth 2.0 client 
+credentials.
+ 
+ 
+
+
+ 
+ 
+4
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+ 
+1.
+ 
+During API on boarding, customers will  receive a cli ent id  and a cl ient secret. Thi s pair 
+ 
+o f credentials will b e used to retrieve a valid jwt ( tok en)  via 
+G2RS'
+ 
+Okta i nstance. Please 
+sto re these somewhere securely.
+ 
+2.
+ 
+Client credentials should b e en coded in base64 using the f ollowing f ormat: 
+<ClientID>:<C lientSecret> (re
+-
+place <> with specif i c credentials)
+ 
+3.
+ 
+A token can then be retrieved from Okta with the f o l lo wing request:
+ 
+a.
+ 
+ vˆ}Æ~ ›}’ıW
+ 
+Zıı›’Wll’’}XPî„]’l’}oµı]}v’X} ul}µıZ îlµ’í}ÁÀZÀòo˚„ÆíˆôlÀílı} l˚v
+ 
+ 
+b.
+ 
+Production (post): 
+https://sso.g2risksolutions.co m/oauth 2/aus1owaqit51cBAHO1d 8/v1/to ken
+ 
+ 
+c.
+ 
+Content
+-
+›˚W››o] ı]}vlÆ
+-
+www
+-
+fo rm
+-
+urlencoded
+ 
+d.
+ 
+Autho rizatio n: Basic <BASE64_ENCODED > ( replace <> with the strin g obtained i n 
+ 
+step 2)
+ 
+e.
+ 
+Body: grant_type: clien t_credentials
+ 
+4.
+ 
+This will  return a to ken, wh ich shoul d be used f o r all  Monito ring API requests and sho uld  
+
+be pro vided i n th e authori zation header:
+ 
+a.
+ 
+Autho rizatio n: Bearer <jwt> (replace <> with the strin g obtained i n step 3)
+ 
+5.
+ 
+This tok en wi ll be valid f o r one hour. We reco mmend implemen ting a cachi ng mechanism 
+
+to avo id requesting a new token alon g with every API call.
+ 
+ 
+Sample usi ng spring boot security with web client
+ 
+ 
+@Conf iguration
+ 
+publi c class OAuthClientConf iguration {
+ 
+@Bean
+ 
+
+
+ 
+ 
+5
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+ReactiveClientRegistratio nReposito ry cli entRegistrati ons
+( 
+@Value( ﬁ${ spring.security .oauth2.client.provider.ok ta.token
+-
+uri}ﬂ)  S tring to ken_uri, 
+@Value( ﬁ${ spring.security .oauth2.client.registration .o kta.client
+-
+i d } ﬂ)  String client_id, 
+@Value( ﬁ${ spring.security .oauth2.client.registration .o kta.client
+-
+secret}ﬂ)  S trin
+g 
+clien t_secret, @Value( ﬁ${ spring.security .o auth2.clien t.registration .o kta.scope} ﬂ) Strin g 
+scope, @Valu e( ﬁ${ spring.security .o auth2.clien t.registration.okta.authorization
+-
+grant
+-
+type} ﬂ) S trin g autho riza
+-
+ 
+tionGrantTyp e
+ 
+) {
+ 
+ClientRegistratio n registration = Clien tRegistration
+ 
+.with RegistrationId( ﬁoktaﬂ)
+ 
+.tokenUri( tok en_uri)
+ 
+.clientId( clien t_id)
+ 
+.clientSecret(clien t_secret)
+ 
+.scope(sco pe)
+ 
+.autho rizationGrantType(new Authoriz ationGrantTy pe(autho rizationGrantType) )
+ 
+.build( ) ;
+ 
+return  new InMemo ryReactiveClientRegistrationRepository(registration) ;
+ 
+}
+ 
+@Bean
+ 
+WebClient webClient( ReactiveClientRegistrationRepo sito ry clientRegistrations)  {
+ 
+InMemo ryReactiveOAuth2AuthorizedCli entServi ce cli entServi ce = new 
+InMemoryReactiveOAuth2Autho
+-
+ 
+ri zedC lientService( clientRegistratio ns);
+ 
+Autho rizedCli entS ervi ceReactiveOAuth2Autho rizedCli entManager 
+authorizedCli entManager = new Au tho
+-
+ 
+rizedClientServiceReactiveOAuth2Autho rizedClientM anager( clientRegistrations, 
+clien tService) ;
+ 
+ ˚„À˚„µıZîµıZ} „]Ì˚ˆo]˚vıÆZvP ]oı˚„µv ı] }v}µıZv ˚Á
+„À˚„Z îZ} „]Ì˚o]˚vıÆ
+-
+ 
+chan geFilterFun cti on( autho rizedClientM anager) ;
+ 
+o auth.setDefaultClientRegistrationId( ﬁo ktaﬂ) ;
+ 
+return WebCl ient.builder( )
+ 
+.f ilter( o auth)
+ 
+.build( ) ;
+ 
+}
+ 
+}
+ 
+ 
+ 
+@Auto wired
+ 
+private WebClient webClient;
+ 
+ł Z˚ˆµo˚ˆ~( ]Æ˚ˆıñììì›µo]À} ]ˆ’Z˚ˆµo˚ˆ˚‰ µ˚’ı~ ‡
+ 
+
+
+ 
+ 
+6
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+webClient.get( )
+ 
+.uri( ﬁhttp://l ocalhost:8081ﬂ)
+ 
+.retrieve( )
+ 
+.bo dyToMono( S tring.class)
+ 
+.map( string
+ 
+-
+> ﬁS chedule request resp onse: ﬁ + stri ng)
+ 
+.subscribe( logger::inf o) ;
+ 
+ 
+Request types summary
+ 
+ 
+The G2RS Monitoring (PMM/TLD) API is based on REST
+-
+prin cipl es and req uests are sent in JSONvia 
+standard HTTPS  in UTF
+-
+8 format. The API also uses appropriate verbs for each action.
+ 
+There are sev eral calls that are used to  i nteract wi th G2RS™ PMM  and TLD produ cts. Addi tio nally, 
+more detailed documentation in cluding required parameters and parameter descriptions can be 
+f ound on S wagger. The high
+-
+level descri ptions o f  each are as f ollow
+s:
+ 
+ 
+Pro duct
+ 
+Method
+ 
+Action
+ 
+PMM
+ 
+GET
+ 
+url
+-
+ca s es
+ 
+Retrieve list of  published PMM  
+cases withi n provided f il ters
+ 
+PMM
+ 
+GET
+ 
+url
+-
+cases /{ cas eId}
+ 
+Retrieve details of  a specif i c 
+ 
+PMM case
+ 
+TLD
+ 
+GET
+ 
+lead
+-
+ca s es
+ 
+Retrieve a list of  current TLD 
+leads withi n provided f il ters
+ 
+TLD
+ 
+GET
+ 
+lead
+-
+cas es/{caseId}
+ 
+Retrieve the details of  a 
+specif ic TLD lead
+ 
+PMM,
+ 
+TLD
+ 
+GET
+ 
+action
+-
+reasons
+ 
+Retrieves acti on and reasons 
+catalog for PMM 
+( CONTENT_COMPLIANCE) , TLD 
+( TRANS ACTION_LAUNDERING) , 
+or both (ALL)
+ 
+PMM,
+ 
+TLD
+ 
+PUT
+ 
+action
+-
+cases/{caseId}
+ 
+Apply a valid action and reaso n 
+from the acti on
+-
+reason catalog 
+for a PMM case (URLCase) or 
+TLD lead
+ 
+PMM,
+ 
+TLD
+ 
+GET
+ 
+case
+-
+comments
+ 
+Retrieve case comments f or 
+the pro vided caseId
+ 
+PMM,
+ 
+TLD
+ 
+POST
+ 
+case
+-
+comments
+ 
+Create a new co mment rel ated 
+to the provided caseId
+ 
+
+
+ 
+ 
+7  
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+PMM, TLD
+ 
+PUT case
+-
+commen ts
+ 
+›ˆı˚v Æ]’ı]vP} uu˚v
+related to the pro vided  caseId
+ 
+PMM, TLD
+ 
+DELETE case
+-
+co mments
+ 
+u} À˚vÆ]’ı]vP uu˚v
+related to the pro vided  caseId
+ 
+PMM, TLD
+ 
+GET case
+-
+screenshots
+ 
+Retrieve screenshots, 
+screenshot URL, and 
+screensho t caption ( if  
+applicable)  f or the provided 
+caseId. Screenshots 
+are 
+provided in encoded  base64 
+fo rmat
+ 
+TLD
+ 
+GET credit
+-
+cards
+ 
+Retrieve the curren t TLD card 
+list
+ 
+TLD
+ 
+GET trace
+-
+cas es
+ 
+Retrieve list of  published TLD 
+traces wi thin pro vided f il ters
+ 
+TLD
+ 
+GET trace
+-
+cas es/{caseId}
+ 
+Retrieve details of  a specif i c 
+TLD trace
+ 
+TLD
+ 
+POS T trace
+-
+cases/{traceCaseId}/trace
+-
+hit
+ 
+Report TLD test transactio n 
+decli nes and associated 
+merchant details to  G2
+ 
+TLD
+ 
+GET client
+-
+requested
+-
+investigatio n-
+cases
+ 
+Retrieve a list of  current TLD 
+investigatio ns ( client-
+
+requested inv estigatio ns)  
+within  provided f ilters
+ 
+TLD
+ 
+GET client
+-
+requested
+-
+investigatio n
+-
+cases
+/
+{ caseId}
+ 
+Retrieve the details of  a 
+specif ic TLD investigatio n
+ 
+PMM, TL
+ 
+POST client
+-
+requested
+-
+investigatio n-
+cases
+ 
+Requ est a new TLD 
+investigatio n ( client
+-
+requested 
+investigatio n)
+ 
+PMM, TL
+ 
+GET merchants
+-
+search
+ 
+S earch fo r a merchant within 
+your G2RS  merchant dataset
+ 
+PMM, TL
+ 
+GET merchant
+-
+prof ile
+ 
+View merchant attributes 
+provided to G2RS
+ 
+PMM, TL
+ 
+GET 
+merchant
+-
+prof ile/histo ry
+ 
+F etch PMM and TLD  case 
+history for merchan t
+ 
+ 
+G2RS
+ 
+recommends API us ers to  po st PMM  and TLD actions back via the API as so on as cases are 
+actio ned with in your system to ensure accurate data is pro vided to M asterCard MMP ( if your 
+organization 
+i s conf igured fo r MM P mo nthly reporting) and avoid data discrepa
+n cies in  your 
+merchant portfo lio.
+ 
+ 
+
+
+ 
+ 
+8
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+Status codes
+Š
+g
+˚v˚„o~’˚˚’ÁPP˚„(}„’›˚](]u˚’’P˚˚Æu›o˚’
+ 
+ 
+Code
+ 
+Description
+ 
+Body
+ 
+200
+ 
+OK
+ 
+{}
+ 
+204
+ 
+No Co ntent
+ 
+{}
+ 
+201
+ 
+Created
+ 
+{}
+ 
+400
+ 
+Bad 
+Request
+ 
+{ﬁtimestampﬂ: ﬁﬂ
+ 
+ﬁpathﬂ: ﬁﬁ, ﬁstatusﬂ: 400,
+ 
+ﬁerro rﬂ: ﬁBad Requestﬂ, 
+ﬁmessageﬂ: ﬁﬂ,
+ 
+ﬁrequestIdﬂ: ﬁﬂ
+ 
+}
+ 
+401
+ 
+Unauthorized
+ 
+{ﬁtimestampﬂ: ﬁﬂ
+ 
+ﬁpathﬂ: ﬁﬁ, ﬁstatusﬂ: 401,
+ 
+ﬁerro rﬂ: ﬁUnauthorizedﬂ, 
+
+ﬁmessageﬂ: ﬁﬂ,
+ 
+ﬁrequestIdﬂ: ﬁﬂ
+ 
+}
+ 
+403
+ 
+F orbidden
+ 
+{ﬁtimestampﬂ: ﬁﬂ
+ 
+ﬁpathﬂ: ﬁﬁ, ﬁstatusﬂ: 403,
+ 
+ﬁerro rﬂ: ﬁForbiddenﬂ, 
+ﬁmessageﬂ: ﬁﬂ,
+ 
+ﬁrequestIdﬂ: ﬁﬂ
+ 
+}
+ 
+404
+ 
+Not f ound
+ 
+{ﬁtimestampﬂ: ﬁﬂ
+ 
+ﬁpathﬂ: ﬁﬁ, ﬁstatusﬂ: 404,
+ 
+ﬁerrorﬂ: ﬁNot Fo undﬂ,
+ 
+ﬁmessageﬂ: ﬁﬂ,
+ 
+ﬁrequestIdﬂ: ﬁﬂ
+ 
+}
+ 
+500
+ 
+Internal  Serv er Error
+ 
+{ﬁtimestampﬂ: ﬁﬂ
+ 
+ﬁpathﬂ: ﬁﬁ, ﬁstatusﬂ: 500,
+ 
+ﬁerro rﬂ: ﬁInternal Server 
+
+Erro rﬂ, ﬁmessageﬂ: ﬁﬂ,
+ 
+ﬁrequestIdﬂ: ﬁﬂ
+ 
+}
+ 
+ 
+Co mmonly grouped requests
+ 
+ 
+Integrating some PM M/ TLD workf low actio ns via API requires the grouping o f  certain requests. 
+The two mo st commo n use cases f or this are viewing the f ull  detai ls of  a case ( i ncluding 
+
+
+ 
+ 
+9
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+screensho ts/ co mments)  and supplying merchant i nformatio n whi le repo rti ng a test decline, 
+requestin g a TLD investigation, or loo ki ng u p a merchant™s G2
+RS
+ 
+case history.
+ 
+ 
+Case study
+ 
+ 
+F or perf ormance purpo ses , some PMM/ TLD case data compo nents are split into  multi ple 
+endpoints in cluding key  details, comments, and  screenshots. In order to retriev e all relevan t data 
+for a single case, the same caseId sho uld be used  to invoke each of these
+ 
+˚vˆ ›}]vı’ }„˚Æu›o˚U
+to retrieve all details f o r a PMM URLCase, a requ est should b e made wi th the target caseId to:
+ 
+ 
+GET url
+-
+cases/{caseId}
+ 
+ 
+GET case
+-
+commen ts
+ 
+ 
+GET case
+-
+screensho ts
+ 
+ 
+Supplying merchant information
+ 
+ 
+Certain endp oints require the i ds of  
+merchants and associated data within a customer™s G2
+RS
+ 
+monitoring dataset. This i nvolves identif ying the intended merchant via merchants
+-
+search and 
+ıZ˚v›„} À]ˆ]vıZ„˚’µoı]v]ˆ’ı} ıZ„˚o˚Àvı˚vˆ›}]vıÆu›o˚’]voµ ˆ˚W
+ 
+ 
+Reporting  a test transactio n decline/trace hit ( POST trace
+-
+cases/{traceCaseId}/trace
+-
+hit)
+ 
+1.
+ 
+S earch fo r cardNumber via GET trace
+-
+cases to identi fy the associated Trace caseId
+ 
+2.
+ 
+Lo ok up merchant asso ciated wi th the decline via GET merchants
+-
+search
+ 
+3.
+ 
+S endmerchantId, businessId,and urlId returned via merchants
+-
+search to POS T trace
+-
+cases/{traceCaseId}/trace
+-
+hit
+ 
+ 
+Requesting a TLD investi gation ( POST cli ent
+-
+requested
+-
+investigation
+-
+cases)
+ 
+1.
+ 
+Lo ok up merchanti n mo nitoring via GET merchants
+-
+search
+ 
+2.
+ 
+S endmerchantId, busines sId, and urlId returned via merchants
+-
+search to POST clien t
+-
+requested
+-
+investigation
+-
+cases
+ 
+ 
+Retrievi ng a mo nito red merchant™s informatio n o r G2
+RS
+ 
+case his to ry ( GET merchant
+-
+prof ile, GET merchant
+-
+pro file/ histo ry, or GET merchant
+-
+profile/stats)
+ 
+1.
+ 
+Lo ok up merchanti n mo nitoring via GET merchants
+-
+search
+ 
+2.
+ 
+S endmerchantId, busines sId, and urlId returned via merchants
+-
+search to merchant
+-
+prof ile en dpoints
+ 
+ 
+
+
+ 
+ 
+10
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+PMM/TLD 
+n
+otifications webhoo k
+ 
+ 
+Monito ring API customers can sign u p to  receive PMM and TLD  notif icatio ns vi a webhook, which  
+inclu de the fo llowing events: 
+ 
+ 
+PM M repo rt published
+ 
+ 
+TLD lead publ ished or updated
+ 
+ 
+TLD investi gatio n published or up dated
+ 
+To  integrate with the no tifications web hook, customers need to  p ro vide a pu bli c URL/ endpoi nt 
+where G2
+RS
+ 
+will send th e no tif icatio n. G2
+RS
+ 
+will sup port to ken
+-
+based security with each  
+notif icatio n message po sted to this endpoint.
+ 
+Conf iguring the webhoo k can be co mpl eted by sendi ng a POS T request to the ‚subscriptions™ 
+
+endpo int ( see Swagger documentation f or more details). The request body  sho uld includ e the 
+publi c URL/ endpoint where G2RS  will send notif icati ons, the emai l address o
+f  a techni cal contact 
+in the case that delivery attemp ts are u nsuccessful, and a token or username/p assword that G2RS 
+will send with the notification f or security ( optio nal) .
+ 
+Æu› o˚’}( Á˚Z}}lv} ı](]ı]} vu˚’’P˚’]voµˆ˚W
+ 
+ 
+PMM rep ort published
+ 
+ 
+        
+{
+ 
+            
+"ty pe": " REPORT_CAS E_PUBLIS HED ",
+ 
+            
+"en tity Id": 123456,
+ 
+            
+"date": "2023
+-
+08
+-
+04T18:35:35.312+00:00",
+ 
+            
+"body ": " The Monito ring Report: Demo Client 
+Œ
+ 
+8/ 31/ 2023, ID: 123456 h as been 
+ 
+                     
+ 
+ 
+published."
+ 
+        
+}
+ 
+ 
+
+ 
+
+ 
+
+
+ 
+ 
+11
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+TL lead pu blished
+ 
+ 
+        
+{
+ 
+            
+"ty pe": ﬁLEAD_CASE_S TATUS _UPDATED",
+ 
+            
+"en tity Id": 731309406,
+ 
+            
+"date": "2023
+-
+08
+-
+04T18:35:35.312+00:00",
+ 
+            
+"body ": ﬁA TL Lead, ID: 731309406 has been p ublished  f or y o ur organization.ﬂ
+ 
+        
+}
+ 
+ 
+In the event that a no tif ication is undeli verable af ter three attempts, G2RS will  auto
+-
+generate an 
+email to an address specified by  the custo mer ( requ ired)  to no tify API customers of  the 
+no tif icatio n failure.
+ 
+Notif icatio ns can also  be f etched with  a GET notificati o ns request if customers cho ose not to  
+integrate wi th th e webhoo k metho d o r if  notif i cations are un deli verable to  th e 
+custo mer™s 
+endpo int. G2RS™ recommended polling cadence, if integrated with  the GET notificatio ns metho d, is 
+every 5 mi nutes if  your o rganization  has TLD, as leads and TLD inv estigatio n results are publi shed 
+
+in real
+-
+time fo llo wing G2RS analyst revi ew. If yo
+ur organization  has PMM only (no TLD), the 
+reco mmended polling cadence is every  hour.
+ 
+*Please note: webhook  and notif ication lookup f uncti onality are not currently supported in the API 
+
+sandbox.
+ 
+ 
+Performance
+ 
+ 
+Rate l imit
+ 
+íììv’ı]}v’˚„]vµı˚X˚˚ˆ]vP]’ ]u]ı]oo } ˚’µ o v„˚‰µ˚’ı
+f ailure, bu t may cause delays in resul t d elivery.
+ 
+Respo nse time
+ 
+All API calls should return a respo nse wi thin 3 secon ds. Queri es that 
+invo lve a large amo unt of  merchant data ( e.g., so me scenario s of  merchant 
+search, retrieving a large range of URLCases)  may result i n a delay ed 
+response time.
+ 
+Downtime
+ 
+„À]˚À]o]o]ıÇ]’˚Æ›˚ı˚ı}„˚u] v} À˚õõXñ9Xovv˚ˆ
+maintenance downtime will be co mmunicated to clients bef orehan d.
+ 
+ 
+
+
+ 
+ 
+12
+ 
+ 
+www.
+g2risksol utions .c om 
+ 
+©2024 G2 Web Services, In
+c. 
+All 
+r
+ights  
+r
+eserved.
+ 
+vˆ} Æ˚vÀ]„} vu˚vı
+ 
+ 
+Z˚ } v] ı}„]vPvˆ }ÆvÀ]„} vu˚vo} ’˚oÇu]„„}„’„}ˆµı]}vvˆoo}Á’’ı}u˚„’ ˚’
+their PMM /TLD API integration. Customers must au thenticate and will have access to a mo ck data 
+set that may be manipulated wi th any  Monito ring API endpo int.
+ 
+Features:
+ 
+ 
+Authenti cation
+ 
+ 
+Parameter validatio n
+ 
+ 
+Isolated mo ck data set
+ 
+ 
+Repli cate productio n f unctionality, in cluding applying actio ns, requ esting a TLD 
+investigatio n, repo rtin g a test transaction decline, etc.
+ 
+ 
+Response and status code 
+validation
+ 
+*Please note: webhook  and notif ication lookup f uncti onality are not currently supported in the API 
+sandbox.
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+Contact us
+ 
+Email: clientservices@
+g2risk solutions
+.com
+ 
+
+
