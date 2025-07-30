@@ -1,8 +1,15 @@
+import nltk
+import os
+
+nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
+os.makedirs(nltk_data_dir, exist_ok=True)
+nltk.data.path.append(nltk_data_dir)
+nltk.download("punkt", download_dir=nltk_data_dir)
+
 import streamlit as st
 from llama_index.core import VectorStoreIndex, Document
 from PyPDF2 import PdfReader
 from io import StringIO
-import os
 from datetime import datetime
 
 st.set_page_config(page_title="Onbo - AI-Powered API Assistant")
