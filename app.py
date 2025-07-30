@@ -18,10 +18,14 @@ import os
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
 
-import os
+openai_key = os.getenv("OPENAI_API_KEY")
+
+if not openai_key:
+    raise ValueError("Missing OpenAI API key. Make sure it is set in Streamlit secrets.")
+
 Settings.embed_model = OpenAIEmbedding(
     model="text-embedding-ada-002",
-    api_key=os.getenv("OPENAI_API_KEY")
+    api_key=openai_key
 )
 
 nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
