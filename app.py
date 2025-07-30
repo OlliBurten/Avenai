@@ -1,3 +1,17 @@
+import os
+import nltk
+
+# Force NLTK to download into a writable directory
+nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
+os.makedirs(nltk_data_dir, exist_ok=True)
+nltk.data.path.append(nltk_data_dir)
+
+# Patch downloader to avoid permission errors
+original_download = nltk.download
+def safe_download(package, download_dir=None, **kwargs):
+    return original_download(package, download_dir=nltk_data_dir, **kwargs)
+nltk.download = safe_download
+
 import nltk
 import os
 
