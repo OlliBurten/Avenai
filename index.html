@@ -1,271 +1,835 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Thu Jul 31 2025 15:43:41 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="688b8c03340c616f9bb11974" data-wf-site="688b8c03340c616f9bb1192e">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Avenai – AI-Powered API Onboarding</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0e0e2c;
-      color: #f4f4f4;
-      line-height: 1.75;
-      overflow-x: hidden;
-    }
-
-    .glass {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    header {
-      background: radial-gradient(ellipse at center, #1f1f5e 0%, #0e0e2c 100%);
-      padding: 100px 20px 60px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 15px;
-    }
-
-    header p {
-      font-size: 1.25rem;
-      color: #ccc;
-      max-width: 600px;
-      margin: 0 auto 30px;
-    }
-
-    button {
-      background: linear-gradient(135deg, #6c47ff 0%, #a96bff 100%);
-      box-shadow: 0 0 10px rgba(172, 111, 255, 0.4);
-      color: #fff;
-      padding: 14px 28px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      font-weight: 600;
-    }
-
-    button:hover {
-      background: #8d66ff;
-    }
-
-    section {
-      padding: 80px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      font-size: 2rem;
-      color: #ffffff;
-      margin-bottom: 20px;
-    }
-
-    p, li, blockquote {
-      font-size: 1.05rem;
-      color: #ddd;
-      margin-bottom: 10px;
-      line-height: 1.6;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    iframe {
-      width: 100%;
-      height: 500px;
-      border-radius: 10px;
-      border: 1px solid #2e2e60;
-      margin-top: 30px;
-    }
-
-    .pricing {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .pricing-card {
-      background: #1c1c3c;
-      border: 2px solid #30306e;
-      padding: 30px;
-      border-radius: 12px;
-      width: 300px;
-      color: #fff;
-      transition: transform 0.3s ease;
-    }
-
-    .pricing-card.featured {
-      border-color: #6c47ff;
-      box-shadow: 0 0 20px rgba(108, 71, 255, 0.5);
-    }
-
-    .pricing-card:hover {
-      transform: scale(1.05);
-    }
-
-    input[type="email"] {
-      padding: 12px;
-      font-size: 1rem;
-      width: 60%;
-      border: none;
-      border-radius: 6px;
-      margin-right: 10px;
-    }
-
-    form {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 0.9rem;
-      background: #0b0b22;
-      color: #888;
-    }
-
-    a {
-      color: #6c47ff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    blockquote {
-      border-left: 4px solid #6c47ff;
-      padding-left: 16px;
-      font-style: italic;
-      background: #1a1a39;
-      margin: 20px 0;
-    }
-
-    .glass-block {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      margin-bottom: 40px;
-    }
-  </style>
+  <meta charset="utf-8">
+  <title>Cluster - Webflow HTML website template</title>
+  <meta content="A futuristic one-page template tailored to companies offering SaaS or collaboration tools. Focus on a bold hero section with product benefits, feature highlights, and a visually engaging demo or tutorial video section. Include pricing tiers, integration options, and customer testimonials. Use geometric shapes, gradients, or micro-interactions to give a cutting-edge, tech-forward feel." name="description">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/avenai-ce7f92.webflow.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.svg" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
 <body>
-  <header>
-    <div class="glass" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
-      <img src="/mnt/data/A_digital_vector_graphic_features_the_logo_for_Ave.png" width="40" alt="Avenai Logo"/>
-      <h1 style="margin: 0;">Avenai</h1>
-    </div>
-    <p>Your AI-powered avenue to faster onboarding and smarter integrations.</p>
-    <a href="#demo"><button>Try the Demo</button></a>
-  </header>
-
-  <section>
-    <div class="glass-block">
-      <h2>The Problem</h2>
-      <ul>
-        <li>API docs are overwhelming and hard to navigate</li>
-        <li>Support teams repeat the same answers over and over</li>
-        <li>Integration delays cost time, trust, and revenue</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="glass-block">
-      <h2>The Solution</h2>
-      <ul>
-        <li>Upload your API docs</li>
-        <li>Onbo instantly answers developer and CS questions</li>
-        <li>Query history, session/version isolation, usage tracking</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="demo">
-    <div class="glass-block">
-      <h2>Live Demo</h2>
-      <p>Test Avenai with your own API documentation or try our sample.</p>
-      <a href="https://onbo-assistant.streamlit.app" target="_blank">
-        <button>Launch Demo in New Tab</button>
-      </a>
-    </div>
-  </section>
-
-  <section>
-    <h2>What You Get</h2>
-    <ul>
-      <li>Multi-document support (.pdf, .txt)</li>
-      <li>Real-time Q&A with source tracking</li>
-      <li>Session + version isolation</li>
-      <li>Query logs, limits, and analytics</li>
-      <li>Billing-ready architecture</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>What People Say</h2>
-    <blockquote>"Cut our onboarding time in half. This is our new first responder." – SaaS CTO</blockquote>
-    <blockquote>"Clients are up and running in days instead of weeks. Love it." – Implementation Manager</blockquote>
-  </section>
-
-  <section>
-    <h2>Pricing</h2>
-    <p>Start free. Upgrade when you're ready.</p>
-    <div class="pricing">
-      <div class="pricing-card">
-        <h3>Free</h3>
-        <p>20 queries per session</p>
-        <ul><li>Single user</li><li>Local agent</li></ul>
-        <button>Start Free</button>
-      </div>
-      <div class="pricing-card featured">
-        <h3>Pro</h3>
-        <p>Unlimited queries</p>
-        <ul><li>Team access</li><li>Analytics</li><li>Priority support</li></ul>
-        <button>Upgrade</button>
+  <div class="page-wrapper">
+    <div class="header-section">
+      <div class="w-layout-blockcontainer header-container w-container">
+        <div data-w-id="9cb2e8b3-3a11-f83b-e00a-f7e731e098bd" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-area w-nav">
+          <div class="nav-bar-wrapper">
+            <div class="brand-logo">
+              <div class="logo-wrap">
+                <a href="index.html" aria-current="page" class="brand w-nav-brand w--current"><img loading="lazy" src="images/Frame-5.svg" alt="Logo" class="logo"></a>
+              </div>
+            </div>
+            <nav role="navigation" class="nav-menu-items w-nav-menu">
+              <a href="index.html" aria-current="page" class="nav-menu-item w-nav-link w--current">Home</a>
+              <a href="#Feature" class="nav-menu-item w-nav-link">Features</a>
+              <a href="#About" class="nav-menu-item w-nav-link">About</a>
+              <a href="#Pricing" class="nav-menu-item w-nav-link">Pricing</a>
+              <a href="#Cta" class="nav-menu-item w-nav-link">Contact</a>
+            </nav>
+            <div class="navbar-button-wrapper">
+              <div class="header-button">
+                <a data-wf--primary-button--variant="black" href="tel:123456789" class="button-primary w-variant-4bc23086-06f9-0830-2e13-4f79df6fa60e w-inline-block">
+                  <div>Book A Call</div>
+                </a>
+              </div>
+              <div class="menu-button w-nav-button">
+                <div class="nenu-icon-wrap">
+                  <div class="top-line"></div>
+                  <div class="bottom-line"></div>
+                  <div class="bottom"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
-
-  <section>
-    <h2>Stay in the Loop</h2>
-    <form action="https://your-mailing-list-or-stripe-url.com" method="POST">
-      <input type="email" name="email" placeholder="Your email">
-      <button type="submit">Join the Waitlist</button>
-    </form>
-  </section>
-
-  <footer>
-    © 2025 Avenai · Built by Oliver Harburt · <a href="#">Privacy</a> · <a href="#">Terms</a>
-  </footer>
+    <header data-w-id="a0d2fd92-f056-bf79-ab83-ba7eeffd19f2" class="hero-section">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="hero-item-wrapper">
+          <div class="hero-content-wrapper">
+            <h1 style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="hero-heading-text">Empower Your Finances with Smart Solutions</h1>
+            <div style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="hero-sub-title">Transform your financial management with intuitive, data-driven solutions for better efficiency, accuracy, and growth.</div>
+            <div style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="hero-button-wrap">
+              <a data-wf--primary-button--variant="base" href="#Pricing" class="button-primary w-inline-block">
+                <div>Start 14 days free trial</div>
+              </a>
+            </div>
+            <div style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="user-info-wrapper">
+              <div class="user-image-wrapper"><img src="images/wireframe-1_1wireframe-1.png" loading="lazy" alt="User Image" class="user-image fast"><img src="images/wireframe-1-1_1wireframe-1-1.png" loading="lazy" alt="User Image" class="user-image"><img src="images/wireframe-1-2_1wireframe-1-2.png" loading="lazy" alt="User Image" class="user-image"></div>
+              <div class="star-image-wrapper">
+                <div class="ratting-wrapper">
+                  <div class="star-icon-flex-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 15" fill="none" class="star-icon">
+                      <path d="M7.99929 12.1735L3.29729 14.8055L4.34729 9.52016L0.390625 5.8615L5.74196 5.22683L7.99929 0.333496L10.2566 5.22683L15.6079 5.8615L11.6513 9.52016L12.7013 14.8055L7.99929 12.1735Z" fill="currentColor"></path>
+                    </svg><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 15" fill="none" class="star-icon">
+                      <path d="M7.99929 12.1735L3.29729 14.8055L4.34729 9.52016L0.390625 5.8615L5.74196 5.22683L7.99929 0.333496L10.2566 5.22683L15.6079 5.8615L11.6513 9.52016L12.7013 14.8055L7.99929 12.1735Z" fill="currentColor"></path>
+                    </svg><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 15" fill="none" class="star-icon">
+                      <path d="M7.99929 12.1735L3.29729 14.8055L4.34729 9.52016L0.390625 5.8615L5.74196 5.22683L7.99929 0.333496L10.2566 5.22683L15.6079 5.8615L11.6513 9.52016L12.7013 14.8055L7.99929 12.1735Z" fill="currentColor"></path>
+                    </svg><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 15" fill="none" class="star-icon">
+                      <path d="M7.99929 12.1735L3.29729 14.8055L4.34729 9.52016L0.390625 5.8615L5.74196 5.22683L7.99929 0.333496L10.2566 5.22683L15.6079 5.8615L11.6513 9.52016L12.7013 14.8055L7.99929 12.1735Z" fill="currentColor"></path>
+                    </svg><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 15" fill="none" class="star-icon">
+                      <path d="M7.99929 12.1735L3.29729 14.8055L4.34729 9.52016L0.390625 5.8615L5.74196 5.22683L7.99929 0.333496L10.2566 5.22683L15.6079 5.8615L11.6513 9.52016L12.7013 14.8055L7.99929 12.1735Z" fill="currentColor"></path>
+                    </svg></div>
+                  <div class="text-five">5.0</div>
+                </div>
+                <div class="total-review">From 600+ reviews.</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-image-wrapper">
+            <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.8, 0.8, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="hero-image-inner-wrap">
+              <div class="image-box"><img src="images/Medium_User_1Medium_User.webp" loading="lazy" alt="Hero Image" class="hero-image-one"></div>
+              <div class="image-box"><img src="images/Medium_Transfers.svg" loading="lazy" alt="Hero Image" class="hero-image-two"></div>
+            </div>
+            <div class="hero-image-inner-wrap two">
+              <div class="image-box"><img src="images/Small_Chart.svg" loading="lazy" alt="Hero Image" class="hero-image-three"></div>
+              <div class="image-box"><img src="images/Medium.svg" loading="lazy" alt="Hero Image" class="hero-image-four"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-shape"></div>
+      <div class="left-shape"></div>
+      <div class="border-shape-wrapper"><img src="images/Graph-2.png" loading="lazy" alt="Shape Image" class="shape-image"></div>
+    </header>
+    <main class="main-wrapper">
+      <div class="business-partner-section">
+        <div class="padding-global padding-bottom-120px">
+          <div class="w-layout-blockcontainer base-container w-container">
+            <div class="margin-bottom-32px">
+              <div data-w-id="99815e51-d3ed-c306-2f5b-f018ed9ebaa8" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="business-heading-text">Join 4,000+ businesses driving financial growth.</div>
+            </div>
+            <div data-w-id="906dcfcb-4e5b-cd9b-336c-f5631ecc6496" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="marquee-wrapper">
+              <div data-w-id="3c85b287-2ad4-1270-7cf1-2e51e1e4ddec" class="logos-inner">
+                <div class="logos-wrapper"><img src="images/dotcells-color.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-1.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/GOLDTURTLE-color.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-3.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-4.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"></div>
+                <div class="logos-wrapper"><img src="images/dotcells-color.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-1.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/GOLDTURTLE-color.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-3.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-4.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"></div>
+              </div>
+              <div data-w-id="6e5c936c-1461-395c-992d-fba17ac11b30" style="-webkit-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-100%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="logos-inner">
+                <div class="logos-wrapper"><img src="images/Fictional-company-logo-5.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-6.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-7.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-8.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-9.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"></div>
+                <div class="logos-wrapper"><img src="images/Fictional-company-logo-5.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-6.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-7.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-8.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"><img src="images/Fictional-company-logo-9.svg" loading="lazy" alt="Marquee Image" class="ui-logo-marquee"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section id="About" data-w-id="ffea7348-82be-e86f-0ba4-8aecff4abb5a" class="discover-fintech-solutions">
+        <div class="padding-global padding-bottom-120px">
+          <div class="w-layout-blockcontainer base-container w-container">
+            <div class="margin-bottom-48px">
+              <div class="discover-fintech-heading-wrap">
+                <div class="margin-bottom-24px">
+                  <h2 data-w-id="e5e12544-6513-c7a4-e8bd-c05f579f04cb" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Discover How Fintech Simplifies Your Everyday Life.</h2>
+                </div>
+                <p data-w-id="3c9fa484-7589-31b4-9980-274ccb728d57" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Learn how Fintech simplifies payments, enhances financial management, and provides innovative tools to streamline your daily financial tasks.</p>
+              </div>
+            </div>
+            <div class="margin-bottom-48px">
+              <div data-w-id="df3c9dd4-6e10-8882-d9b2-2676f8608964" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="dashboard-image-wrapper"><img src="images/Grid-System_1Grid-System.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/Grid-System_1Grid-System.webp 500w, images/Grid-System_1Grid-System.webp 800w, images/Grid-System_1Grid-System.webp 1080w, images/Grid-System_1Grid-System.webp 1140w" alt="Dashboard Image" class="dashboard-image">
+                <div class="overly-wrapper"></div>
+                <div class="play-icon-wrapper">
+                  <a href="#" class="lightboc-link w-inline-block w-lightbox"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 15 24" fill="none" class="play-icon">
+                      <path d="M15 12L0.749999 23.2583L0.75 0.741669L15 12Z" fill="currentColor"></path>
+                    </svg>
+                    <script type="application/json" class="w-json">{
+  "items": [
+    {
+      "url": "https://www.youtube.com/watch?v=E5WGzdnR2Gw&list=PLPmnoMVpkxfi_YN5QPKyJ9pbF7VOTviU_",
+      "originalUrl": "https://www.youtube.com/watch?v=E5WGzdnR2Gw&list=PLPmnoMVpkxfi_YN5QPKyJ9pbF7VOTviU_",
+      "width": 940,
+      "height": 528,
+      "thumbnailUrl": "https://i.ytimg.com/vi/E5WGzdnR2Gw/hqdefault.jpg",
+      "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FE5WGzdnR2Gw%3Flist%3DPLPmnoMVpkxfi_YN5QPKyJ9pbF7VOTviU_&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DE5WGzdnR2Gw&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FE5WGzdnR2Gw%2Fhqdefault.jpg&type=text%2Fhtml&schema=youtube\" width=\"940\" height=\"528\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe>",
+      "type": "video"
+    }
+  ],
+  "group": ""
+}</script>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div data-w-id="74f5f19a-e339-9710-8e80-c5688009e54b" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="counter-wrapper">
+              <div class="round-counter-box">
+                <div class="counter-text">
+                  <div class="counter-col">
+                    <div class="count-wrap count-one">
+                      <div class="count-text">4</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">9</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">4</div>
+                    </div>
+                  </div>
+                  <div class="counter-col">
+                    <div class="count-wrap count-two">
+                      <div class="count-text">5</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">3</div>
+                      <div class="count-text">0</div>
+                    </div>
+                  </div>
+                  <div class="counter-col">
+                    <div class="count-wrap count-three">
+                      <div class="count-text">0</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">3</div>
+                      <div class="count-text">0</div>
+                    </div>
+                  </div>
+                  <div class="counter-k">
+                    <div class="count-wrap count-k">
+                      <div class="count-text">k</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="counter-des">
+                  <div class="black-des">Active Users</div>
+                </div>
+              </div>
+              <div class="round-counter-box">
+                <div class="counter-text">
+                  <div class="counter-col">
+                    <div class="count-wrap count-one">
+                      <div class="count-text">$2.</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">9</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">4</div>
+                    </div>
+                  </div>
+                  <div class="counter-col">
+                    <div class="count-wrap count-two">
+                      <div class="count-text">7</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">3</div>
+                      <div class="count-text">0</div>
+                    </div>
+                  </div>
+                  <div class="counter-col">
+                    <div class="count-wrap count-three">
+                      <div class="count-text">M</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">3</div>
+                      <div class="count-text">0</div>
+                    </div>
+                  </div>
+                  <div class="counter-k">
+                    <div class="count-wrap count-k">
+                      <div class="count-text">+</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="counter-des">
+                  <div class="black-des">Monthly Transaction</div>
+                </div>
+              </div>
+              <div class="round-counter-box">
+                <div class="counter-text">
+                  <div class="counter-col">
+                    <div class="count-wrap count-one">
+                      <div class="count-text">4</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">9</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">4</div>
+                    </div>
+                  </div>
+                  <div class="counter-col">
+                    <div class="count-wrap count-two">
+                      <div class="count-text">4</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">3</div>
+                      <div class="count-text">0</div>
+                    </div>
+                  </div>
+                  <div class="counter-col">
+                    <div class="count-wrap count-three">
+                      <div class="count-text">5</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">3</div>
+                      <div class="count-text">0</div>
+                    </div>
+                  </div>
+                  <div class="counter-k">
+                    <div class="count-wrap count-k">
+                      <div class="count-text">+</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="counter-des">
+                  <div class="black-des">Company Partner</div>
+                </div>
+              </div>
+              <div class="round-counter-box">
+                <div class="counter-text">
+                  <div class="counter-col">
+                    <div class="count-wrap count-one">
+                      <div class="count-text">4</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">9</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">4</div>
+                    </div>
+                  </div>
+                  <div class="counter-col">
+                    <div class="count-wrap count-two">
+                      <div class="count-text">0</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">3</div>
+                      <div class="count-text">0</div>
+                    </div>
+                  </div>
+                  <div class="counter-col">
+                    <div class="count-wrap count-three">
+                      <div class="count-text">0</div>
+                      <div class="count-text">0</div>
+                      <div class="count-text">8</div>
+                      <div class="count-text">7</div>
+                      <div class="count-text">6</div>
+                      <div class="count-text">5</div>
+                      <div class="count-text">3</div>
+                      <div class="count-text">0</div>
+                    </div>
+                  </div>
+                  <div class="counter-k">
+                    <div class="count-wrap count-k">
+                      <div class="count-text">+</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="counter-des">
+                  <div class="black-des">App Downloaded</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="Feature" class="feature-section">
+        <div class="padding-global padding-bottom-120px">
+          <div class="w-layout-blockcontainer base-container w-container">
+            <div class="feature-item-wrapper">
+              <div class="feature-inner-wrapper">
+                <div class="feature-left-area">
+                  <div class="margin-bottom-24px">
+                    <h2 data-w-id="257d89b0-fa2c-e0a4-cb61-7e9274be2b16" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Understand Finances &amp; Plan Accordingly.</h2>
+                  </div>
+                  <div class="margin-bottom-32px">
+                    <p data-w-id="5333c476-e1b2-8351-2856-7fd144f52448" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Gain deep insights into your finances, empowering smarter decisions, reducing risks, improving efficiency, and fostering sustainable growth for long-term success.</p>
+                  </div>
+                  <div class="margin-bottom-40px">
+                    <div data-w-id="a8cf3aac-0df2-23e0-2795-ca9f2ac42f57" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-inner-boxes">
+                      <div class="feature-details-box">
+                        <h3 class="heading-three">Track Financials</h3>
+                        <p class="body-sm">Regularly monitor key metrics to ensure stability, profitability, and growth.</p>
+                      </div>
+                      <div class="feature-details-box">
+                        <h3 class="heading-three">Plan Growth</h3>
+                        <p class="body-sm">Develop tailored strategies to optimize cash flow, investments, and expansion opportunities.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-w-id="788f20ca-7cd1-a2fa-a632-fa62b007b8a1" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-button-wrapper">
+                    <a data-wf--primary-button--variant="base" href="#Pricing" class="button-primary w-inline-block">
+                      <div>Get Started</div>
+                    </a>
+                  </div>
+                </div>
+                <div data-w-id="cf7a6163-eda9-837e-ff4a-fc77bd11a5d1" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-right-area"><img src="images/fe-1-1_1fe-1-1.webp" loading="lazy" alt="Feature Image" class="feature-image"></div>
+              </div>
+              <div class="feature-inner-wrapper">
+                <div data-w-id="c0a011ce-e77a-e8d2-981b-9c41d7bae37f" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-right-area two"><img src="images/Medium_Transfers_1Medium_Transfers.webp" loading="lazy" alt="Feature Image" class="feature-image"></div>
+                <div id="w-node-c0a011ce-e77a-e8d2-981b-9c41d7bae36d-9bb11974" class="feature-left-area">
+                  <div class="margin-bottom-24px">
+                    <h2 data-w-id="c0a011ce-e77a-e8d2-981b-9c41d7bae36f" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-title">Take Full Charge Of Your Transactions.</h2>
+                  </div>
+                  <div class="margin-bottom-32px">
+                    <p data-w-id="c0a011ce-e77a-e8d2-981b-9c41d7bae372" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Simplify and streamline your transaction processes for better control, accuracy, and efficiency.</p>
+                  </div>
+                  <div class="margin-bottom-40px">
+                    <div class="feature-list-wrapper">
+                      <div data-w-id="fba10d72-d1eb-4b41-37b8-e67119cfae83" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-list-box">
+                        <div class="feature-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                            <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                          </svg></div>
+                        <p class="feature-list-text">Simplify transaction management with easy-to-use, intuitive tools designed for efficiency.</p>
+                      </div>
+                      <div data-w-id="5f4e3b61-efef-a268-9b9e-f93b9314c706" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-list-box">
+                        <div class="feature-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                            <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                          </svg></div>
+                        <p class="feature-list-text">Ensure accuracy and maintain full control over your finances with real-time tracking.</p>
+                      </div>
+                      <div data-w-id="de703072-f58b-965a-7227-46fcc2ec2f38" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-list-box">
+                        <div class="feature-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                            <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                          </svg></div>
+                        <p class="feature-list-text">Boost efficiency and streamline all financial processes effortlessly for better results.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-w-id="5bb6cd7d-533a-dbef-da03-3846f3e09338" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-button-wrapper">
+                    <a data-wf--primary-button--variant="base" href="#Pricing" class="button-primary w-inline-block">
+                      <div>Get Started</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="feature-inner-wrapper">
+                <div class="feature-left-area">
+                  <div class="margin-bottom-24px">
+                    <h2 data-w-id="b8945887-94f7-b2b5-23bf-00aaeb3c5eed" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-title">Track and manage your personal financial Growth.</h2>
+                  </div>
+                  <div class="margin-bottom-40px">
+                    <div class="margin-bottom-24px">
+                      <p data-w-id="b8945887-94f7-b2b5-23bf-00aaeb3c5ef0" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Stay on top of your financial health by tracking income, expenses, and savings. Make informed decisions to improve your financial stability and achieve long-term goals.</p>
+                    </div>
+                    <p data-w-id="f22eb7ce-1676-435b-9e6a-22692a634647" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Easily monitor your personal finances to ensure you&#x27;re staying on track with your goals. Gain a clear view of your spending, savings, and investments, enabling better decisions for a secure financial future.</p>
+                  </div>
+                  <div data-w-id="b8945887-94f7-b2b5-23bf-00aaeb3c5f06" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-button-wrapper">
+                    <a data-wf--primary-button--variant="base" href="#Pricing" class="button-primary w-inline-block">
+                      <div>Get Started</div>
+                    </a>
+                  </div>
+                </div>
+                <div data-w-id="b8945887-94f7-b2b5-23bf-00aaeb3c5ee9" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="feature-right-area three">
+                  <div class="feature-image-wrapper"><img src="images/Small_Earnings_1Small_Earnings.webp" loading="lazy" alt="Feature Image" class="feature-image"><img src="images/Medium_User-1_1Medium_User-1.webp" loading="lazy" alt="Feature Image" class="feature-image"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="Pricing" class="pricing-section">
+        <div class="padding-global padding-bottom-120px">
+          <div class="w-layout-blockcontainer base-container w-container">
+            <div class="pricing-heading-wrapper">
+              <h2 data-w-id="cb83fb19-94d6-a015-654d-527ab6f551b9" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Flexible Pricing Plans Tailored to Your Unique Needs</h2>
+            </div>
+            <div class="pricing-card-wrapper">
+              <div data-w-id="24119ba0-9623-5243-3c73-bce330807d72" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="pricing-card-body">
+                <div class="pricing-card-header">
+                  <div class="margin-bottom-16px">
+                    <div>Standard Plan<br></div>
+                  </div>
+                  <div class="pricing-wrapper">
+                    <h3 class="price-text">$199</h3>
+                    <div class="currency-text">USD</div>
+                  </div>
+                  <div class="bill-duration">Billed per hour</div>
+                </div>
+                <div class="pricing-feature-list-wrap">
+                  <div class="margin-bottom-16px">
+                    <h4 class="heading-three">What’s included</h4>
+                  </div>
+                  <div class="pricing-feature-list">
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Core tools and features</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Basic reporting and analytics</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Email support</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Mobile access</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Secure transactions</p>
+                    </div>
+                  </div>
+                  <div class="pricing-button-wrap">
+                    <a href="https://cal.com" target="_blank" class="pricing-button w-button">Choose Plan</a>
+                  </div>
+                </div>
+              </div>
+              <div data-w-id="1f7fdc52-8be8-bf8b-637b-2ef2885f2694" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="pricing-card-body highlight">
+                <div class="pricing-card-header">
+                  <div class="margin-bottom-16px">
+                    <div>Premium Plan<br></div>
+                  </div>
+                  <div class="pricing-wrapper">
+                    <h3 class="price-text">$259</h3>
+                    <div class="currency-text">USD</div>
+                  </div>
+                  <div class="bill-duration">Billed per hour</div>
+                </div>
+                <div class="pricing-feature-list-wrap is-white">
+                  <div class="margin-bottom-16px">
+                    <h4 class="heading-three">What’s included</h4>
+                  </div>
+                  <div class="pricing-feature-list">
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon is-white"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Advanced tools and features</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon is-white"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Detailed analytics and reporting</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon is-white"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Email support</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon is-white"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Priority customer support</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon is-white"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Mobile and desktop access</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon is-white"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">24/7 monitoring</p>
+                    </div>
+                  </div>
+                  <div class="pricing-button-wrap">
+                    <a href="https://cal.com" target="_blank" class="pricing-button w-button">Choose Plan</a>
+                  </div>
+                </div>
+              </div>
+              <div data-w-id="9bdedbce-14fd-b3aa-43be-e11955127cd5" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="pricing-card-body">
+                <div class="pricing-card-header">
+                  <div class="margin-bottom-16px">
+                    <div>Agency Plan<br></div>
+                  </div>
+                  <div class="pricing-wrapper">
+                    <h3 class="price-text">$699</h3>
+                    <div class="currency-text">USD</div>
+                  </div>
+                  <div class="bill-duration">Billed per hour</div>
+                </div>
+                <div class="pricing-feature-list-wrap">
+                  <div class="margin-bottom-16px">
+                    <h4 class="heading-three">What’s included</h4>
+                  </div>
+                  <div class="pricing-feature-list">
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Advanced tools and features</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Detailed analytics</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Priority customer support</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">Mobile and desktop access</p>
+                    </div>
+                    <div class="pricing-list-box">
+                      <div class="pricing-list-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 8 6" fill="none" class="feature-icon">
+                          <path d="M7.80038 1.20509L3.37499 5.79308C3.24222 5.93072 3.06795 6 2.89367 6C2.71939 6 2.54511 5.93072 2.41234 5.79308L0.199709 3.49908C-0.0665698 3.22314 -0.0665698 2.77699 0.199709 2.50104C0.465864 2.22497 0.896074 2.22497 1.16235 2.50104L2.89367 4.29602L6.83774 0.207053C7.10389 -0.0690175 7.5341 -0.0690175 7.80038 0.207053C8.06654 0.482993 8.06654 0.929022 7.80038 1.20509Z" fill="currentColor"></path>
+                        </svg></div>
+                      <p class="feature-list-text">24/7 monitoring</p>
+                    </div>
+                  </div>
+                  <div class="pricing-button-wrap">
+                    <a href="https://cal.com" target="_blank" class="pricing-button w-button">Choose Plan</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pricing-left-shape"></div>
+        <div class="pricing-right-shape"></div>
+      </section>
+      <section id="Review" class="testimonial-section">
+        <div class="padding-global padding-bottom-120px">
+          <div class="w-layout-blockcontainer base-container w-container">
+            <div class="margin-bottom-60px">
+              <div class="testimonial-heading-wrap">
+                <h2 data-w-id="fc6cc346-d3fb-09c6-1767-7a01f80b85f0" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">What Client Say About Our Business</h2>
+              </div>
+            </div>
+            <div class="testimonial-items-wrapper">
+              <div data-w-id="4fca9457-9a11-2788-2861-3090856f2779" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Kathryn Murphy</div>
+                      <div class="client-designation">COO</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“Cluster has completely transformed how we manage our finances. The user-friendly platform provides invaluable insights, simplifies complex processes, and improves our efficiency. Highly recommended!”</p>
+              </div>
+              <div data-w-id="1850f9bd-26ce-0d9f-fcbd-6719f8c159a3" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image-Container.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Bessie Cooper</div>
+                      <div class="client-designation">CFO</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“Cluster makes tracking expenses and optimizing cash flow effortless and accurate. Its intuitive dashboard has become an essential tool for our growing business operations.”</p>
+              </div>
+              <div data-w-id="dc5485bd-2c06-afcd-6072-2d8dc680156f" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image-Container-1.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Eleanor Pena</div>
+                      <div class="client-designation">Finance Manager</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“Switching to Cluster was a complete game-changer for us. The analytics and tools have significantly improved our productivity, decision-making, and overall profitability.”</p>
+              </div>
+              <div data-w-id="e97ecf3d-4a1b-c862-1f4d-a06e9a431ead" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image-Container-2.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Jacob Jones</div>
+                      <div class="client-designation">Accounts Manager</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“The customer support team at Cluster is truly exceptional. They’re always quick to assist, provide detailed solutions, and ensure a seamless experience for our business.”</p>
+              </div>
+              <div data-w-id="738c5886-19b2-3aef-2bda-c7733f74ac25" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image-1.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Dianne Russell</div>
+                      <div class="client-designation">Finance Advisor</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“Cluster simplifies financial management with automation, accurate reporting, and well-organized tools. It has saved us significant time and effort every week.”</p>
+              </div>
+              <div data-w-id="f15de00e-d696-4698-8e4e-b8919d2de348" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image-Container-3.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Savannah Nguyen</div>
+                      <div class="client-designation">CEO</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“The analytics provided by Cluster are incredibly helpful and precise. It gives us a clear view of financial health, helping us make smarter, data-driven decisions.”</p>
+              </div>
+              <div data-w-id="c7084c40-56de-3cd2-fe36-69387178c952" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image-Container-4.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Kathryn Murphy</div>
+                      <div class="client-designation">Accounts Manager</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“Cluster is worth every penny, offering incredible features that improve financial accuracy, decision-making, and overall business success beyond expectations”</p>
+              </div>
+              <div data-w-id="5343b78f-92dd-f236-d10b-38a9f7dd3958" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image-Container-5.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Kristin Watson</div>
+                      <div class="client-designation">Finance Advisor</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“The automation tools in Flowfye have saved us countless hours of manual work, boosted our efficiency, and enhanced productivity across our entire team”</p>
+              </div>
+              <div data-w-id="609bf5fc-39c5-cfb4-1822-8c660f5161f9" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="testimonial-card-body">
+                <div class="margin-bottom-24px">
+                  <div class="client-image-wrapper"><img src="images/Image-Container-6.svg" loading="lazy" alt="Client Image" class="client-image">
+                    <div>
+                      <div class="client-name">Jenny Wilson</div>
+                      <div class="client-designation">CEO</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="client-say">“The platform is intuitive, well-designed, and seamlessly integrated with our systems, making financial processes smooth, efficient, and hassle-free.”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-left-shape"></div>
+        <div class="testimonial-right-shape"></div>
+      </section>
+      <section id="Cta" class="cta-section">
+        <div class="padding-global padding-bottom-120px">
+          <div class="w-layout-blockcontainer base-container w-container">
+            <div class="cta-background-wrapper">
+              <div class="cta-heading-wrapper">
+                <div class="margin-bottom-24px">
+                  <h2 data-w-id="392b1ec6-f703-ceaf-5f0f-9895ebfb62f5" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Take Charge of Your Finances Today!</h2>
+                </div>
+                <div class="margin-bottom-40px">
+                  <p data-w-id="07066d5e-0f41-188c-7ef9-698fdfd66701" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Try Cluster free for 14 days—no credit card required. Transform your business with powerful financial tools.</p>
+                </div>
+                <div data-w-id="7eac8176-9692-3053-9dba-1dee3db3113e" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="cta-button-wrap">
+                  <a data-wf--primary-button--variant="base" href="#Pricing" class="button-primary w-inline-block">
+                    <div>Start 14 days free trial</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer-section">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="margin-bottom-60px">
+          <div class="footer-widget-wrapper">
+            <div data-w-id="98ca07a0-b2b7-c517-c308-a44a80d5950f" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="footer-logo-wrapper">
+              <div class="margin-bottom-24px">
+                <a href="index.html" aria-current="page" class="logo-link w-inline-block w--current"><img src="images/Frame-5.svg" loading="lazy" alt="Logo" class="logo"></a>
+              </div>
+              <div class="margin-bottom-24px">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse feugiat nunc in erat auctor bibendum. Suspendisse.</p>
+              </div>
+              <div class="social-icon-wrapper">
+                <a href="https://www.instagram.com" target="_blank" class="social-icon-link w-inline-block"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 26 24" fill="none" class="social-icon">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3194 2H8.43056C5.36231 2 2.875 4.48731 2.875 7.55556V16.4444C2.875 19.5127 5.36231 22 8.43056 22H17.3194C20.3876 22 22.875 19.5127 22.875 16.4444V7.55556C22.875 4.48731 20.3876 2 17.3194 2ZM20.9305 16.4444C20.9244 18.4362 19.3112 20.0494 17.3194 20.0556H8.43056C6.43873 20.0494 4.82555 18.4362 4.81945 16.4444V7.55556C4.82555 5.56372 6.43873 3.95054 8.43056 3.94444H17.3194C19.3112 3.95054 20.9244 5.56372 20.9305 7.55556V16.4444ZM18.1527 7.83333C18.7664 7.83333 19.2638 7.33587 19.2638 6.72222C19.2638 6.10858 18.7664 5.61111 18.1527 5.61111C17.5391 5.61111 17.0416 6.10858 17.0416 6.72222C17.0416 7.33587 17.5391 7.83333 18.1527 7.83333ZM12.875 7C10.1136 7 7.875 9.23858 7.875 12C7.875 14.7614 10.1136 17 12.875 17C15.6364 17 17.875 14.7614 17.875 12C17.878 10.673 17.3521 9.39952 16.4137 8.4612C15.4754 7.52288 14.202 6.99704 12.875 7ZM9.81945 12C9.81945 13.6876 11.1874 15.0556 12.875 15.0556C14.5625 15.0556 15.9305 13.6876 15.9305 12C15.9305 10.3124 14.5625 8.94444 12.875 8.94444C11.1874 8.94444 9.81945 10.3124 9.81945 12Z" fill="currentColor"></path>
+                  </svg></a>
+                <a href="https://www.facebook.com/shijemGG/" target="_blank" class="social-icon-link w-inline-block"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 15 24" fill="none" class="social-icon">
+                    <path d="M11.7556 5.33333H8.42217C7.8085 5.33333 7.31106 5.8308 7.31106 6.44444V9.77778H11.7556C11.8819 9.77498 12.0018 9.83378 12.0769 9.93544C12.152 10.0371 12.1731 10.1689 12.1333 10.2889L11.3111 12.7333C11.2353 12.9577 11.0256 13.1093 10.7888 13.1111H7.31106V21.4444C7.31106 21.7512 7.06228 22 6.7555 22H3.97773C3.67091 22 3.42217 21.7512 3.42217 21.4444V13.1111H1.75551C1.44868 13.1111 1.19995 12.8623 1.19995 12.5556V10.3333C1.19995 10.0266 1.44868 9.77778 1.75551 9.77778H3.42217V6.44444C3.42217 3.98984 5.41206 2 7.86662 2H11.7556C12.0623 2 12.3111 2.24873 12.3111 2.55556V4.77778C12.3111 5.0846 12.0623 5.33333 11.7556 5.33333Z" fill="currentColor"></path>
+                  </svg></a>
+                <a href="https://x.com/flowsamurai_" target="_blank" class="social-icon-link w-inline-block"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 31 24" fill="none" class="social-icon">
+                    <path d="M26.8412 4.89857C26.2342 5.7084 25.5003 6.41482 24.668 6.99055C24.668 7.20209 24.668 7.41363 24.668 7.63694C24.6747 11.4786 23.1402 15.1622 20.4085 17.8621C17.6767 20.562 13.9764 22.0522 10.1369 21.9986C7.91724 22.0061 5.72597 21.4993 3.73479 20.5178C3.62742 20.4709 3.55817 20.3647 3.55858 20.2475V20.1182C3.55858 19.9494 3.69533 19.8127 3.86401 19.8127C6.04591 19.7407 8.14996 18.9842 9.87849 17.6502C7.90357 17.6104 6.12665 16.4404 5.30889 14.6415C5.26759 14.5433 5.28044 14.4305 5.34283 14.3441C5.40521 14.2577 5.5081 14.2101 5.61431 14.2185C6.21453 14.2787 6.82076 14.2229 7.39987 14.0539C5.21972 13.6013 3.58157 11.7914 3.34713 9.5761C3.3388 9.46982 3.38642 9.36694 3.4728 9.30446C3.55917 9.24211 3.67181 9.22917 3.77003 9.2706C4.35508 9.52877 4.98665 9.66472 5.62606 9.67008C3.71573 8.4163 2.89059 6.03145 3.61731 3.86435C3.69233 3.65377 3.87256 3.4982 4.09176 3.45483C4.31095 3.41144 4.53681 3.48665 4.6863 3.6528C7.26417 6.39642 10.8062 8.03133 14.5655 8.21281C14.4693 7.82858 14.422 7.43369 14.4246 7.03755C14.4598 4.96043 15.745 3.11008 17.6786 2.35277C19.612 1.59548 21.8113 2.08109 23.2467 3.58228C24.225 3.39589 25.1709 3.06726 26.0542 2.60681C26.1189 2.56642 26.2009 2.56642 26.2657 2.60681C26.306 2.67155 26.306 2.75362 26.2657 2.81836C25.8378 3.79807 25.1151 4.61977 24.1982 5.16888C25.0011 5.07577 25.7898 4.88637 26.5476 4.60477C26.6114 4.56134 26.6952 4.56134 26.759 4.60477C26.8125 4.62921 26.8525 4.67597 26.8683 4.73258C26.8841 4.7892 26.8742 4.84992 26.8412 4.89857Z" fill="currentColor"></path>
+                  </svg></a>
+                <a href="https://www.linkedin.com/in/markojurisicc/" target="_blank" class="social-icon-link w-inline-block"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 25 24" fill="none" class="social-icon">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.82232 2H20.3779C21.6052 2 22.6001 2.99492 22.6001 4.22222V19.7778C22.6001 21.0051 21.6052 22 20.3779 22H4.82232C3.59502 22 2.6001 21.0051 2.6001 19.7778V4.22222C2.6001 2.99492 3.59502 2 4.82232 2ZM8.15566 18.6667C8.46248 18.6667 8.71121 18.4179 8.71121 18.1111V10.3333C8.71121 10.0266 8.46248 9.77778 8.15566 9.77778H6.48899C6.18217 9.77778 5.93343 10.0266 5.93343 10.3333V18.1111C5.93343 18.4179 6.18217 18.6667 6.48899 18.6667H8.15566ZM7.32232 8.66667C6.40184 8.66667 5.65566 7.92048 5.65566 7C5.65566 6.07952 6.40184 5.33333 7.32232 5.33333C8.2428 5.33333 8.98899 6.07952 8.98899 7C8.98899 7.92048 8.2428 8.66667 7.32232 8.66667ZM18.7112 18.6667C19.018 18.6667 19.2668 18.4179 19.2668 18.1111V13C19.3029 11.2342 17.9974 9.72724 16.2445 9.51111C15.019 9.39917 13.8315 9.97156 13.1557 11V10.3333C13.1557 10.0266 12.9069 9.77778 12.6001 9.77778H10.9334C10.6267 9.77778 10.3779 10.0266 10.3779 10.3333V18.1111C10.3779 18.4179 10.6267 18.6667 10.9334 18.6667H12.6001C12.9069 18.6667 13.1557 18.4179 13.1557 18.1111V13.9444C13.1557 13.024 13.9019 12.2778 14.8223 12.2778C15.7428 12.2778 16.489 13.024 16.489 13.9444V18.1111C16.489 18.4179 16.7378 18.6667 17.0445 18.6667H18.7112Z" fill="currentColor"></path>
+                  </svg></a>
+              </div>
+              <a data-wf--primary-button--variant="base" href="#Pricing" class="button-primary w-inline-block">
+                <div>Get Started<br></div>
+              </a>
+            </div>
+            <div class="footer-menu-wrapper">
+              <div data-w-id="3e0ac3f7-810c-0775-e8f2-0790497b1599" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="footer-menu-wrap">
+                <div class="footer-menu-title">Company</div>
+                <div class="footer-menu-list">
+                  <a href="index.html" aria-current="page" class="footer-menu-text w--current">Home</a>
+                  <a href="#About" class="footer-menu-text">About Us</a>
+                  <a href="#Feature" class="footer-menu-text">Feature</a>
+                  <a href="#Pricing" class="footer-menu-text">Pricing</a>
+                  <a href="#Review" class="footer-menu-text">Review</a>
+                </div>
+              </div>
+              <div data-w-id="707f2d6c-c9d8-1f13-f59b-77328237f884" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="footer-menu-wrap">
+                <div class="footer-menu-title">Template</div>
+                <div class="footer-menu-list">
+                  <a href="utility-pages/style-guide.html" class="footer-menu-text">Style Guide</a>
+                  <a href="utility-pages/licenses.html" class="footer-menu-text">Licenses</a>
+                  <a href="utility-pages/changelog.html" class="footer-menu-text">Changelog</a>
+                  <a href="#Cta" class="footer-menu-text">Contact Us</a>
+                  <a href="404.html" class="footer-menu-text">404</a>
+                </div>
+              </div>
+              <div data-w-id="78bf5f8f-c8a8-0df4-37e1-0bacc58ca3be" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="footer-menu-wrap last-item">
+                <div class="footer-menu-title">Contact</div>
+                <div class="footer-menu-list">
+                  <a href="tel:(62)103405890" class="footer-menu-text">(62) 103405890</a>
+                  <a href="https://Hello@cluster.com" class="footer-menu-text">Hello@cluster.com</a>
+                  <p class="location-text">6391 Elgin St. Celina, Delaware 10299</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-w-id="3f29d7d6-1a23-8817-0301-5323c5ebc859" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="copyright-wrapper">
+          <div class="copyright-text-box">
+            <div>© All rights reserved. <a href="https://flowsamurai.com" target="_blank" class="footer-menu-text">Flow Samurai</a>
+            </div>
+          </div>
+          <div class="copyright-text-box">
+            <div>Powered by <a href="https://www.webflow.com" target="_blank" class="footer-menu-text">Webflow</a>.</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=688b8c03340c616f9bb1192e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
 </body>
 </html>
