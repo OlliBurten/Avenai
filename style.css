@@ -1,0 +1,179 @@
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  padding-bottom: 100px;
+}
+
+/* Layout */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 0;
+}
+header.nav {
+  background-color: #0a0a0a;
+  padding: 20px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+header.nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header.nav h1 {
+  font-size: 1.8rem;
+  color: #f8fafc;
+}
+header.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+header.nav a {
+  text-decoration: none;
+  color: #f8fafc;
+  font-weight: 500;
+}
+
+.hero,
+.demo,
+.footer {
+  background: #09090b;
+}
+
+.hero {
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+}
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+.cta {
+  background: #6366f1;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+  box-shadow: 0 0 0 transparent;
+}
+.cta:hover {
+  background: #4f46e5;
+  box-shadow: 0 0 15px #6366f1;
+}
+
+/* Features */
+.features {
+  text-align: center;
+  background-color: #0f172a;
+  color: #e5e5e5;
+}
+.features h2 {
+  margin-bottom: 40px;
+  font-size: 2rem;
+  color: #e5e5e5;
+}
+.features-grid {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.feature-item {
+  background: #1e293b;
+  color: #f1f5f9;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+/* Demo */
+.demo {
+  text-align: center;
+  color: #e5e5e5;
+}
+
+/* Pricing */
+.pricing {
+  background: #0f172a;
+  text-align: center;
+  color: #e5e5e5;
+}
+.pricing-tiers {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.tier {
+  background: #1e293b;
+  color: #f1f5f9;
+  padding: 40px 30px;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  max-width: 300px;
+}
+.tier h3 {
+  margin-bottom: 10px;
+}
+.tier ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+.tier ul li {
+  margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  color: #999;
+}
+
+/* Typography and spacing improvements */
+body {
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 1.7;
+}
+
+h2, h3 {
+  font-weight: 600;
+}
+
+/* Modern card hover effect */
+.feature-item,
+.tier {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-item:hover,
+.tier:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo branding enhancement */
+.logo {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}

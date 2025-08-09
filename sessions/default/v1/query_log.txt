@@ -18,3 +18,44 @@ Sources:
 - query_log.txt
 - G2 - MDMX API Implementation Guide 1.pdf
 
+[2025-07-30 23:08:48]
+Q: what does the mdmx api do
+A: The MDMX API allows users to manage their G2 Risk Solutions (G2RS) merchant monitoring portfolio. This includes tasks such as submitting merchants for monitoring, updating merchant attributes, and removing merchants from monitoring. Integrating with the MDMX API enables users to streamline the process of providing and updating merchants within G2RS' system using their own internal platforms or tools. Additionally, utilizing the MDMX API can enhance risk analyst efficiency by eliminating the need for portal-based file uploads.
+Sources:
+- query_log.txt
+- G2 - MDMX API Implementation Guide 1.pdf
+
+[2025-07-31 00:10:12]
+Q: what does the mdmx api do
+A: The MDMX API allows users to manage their G2 Risk Solutions (G2RS) merchant monitoring portfolio. This includes tasks such as submitting merchants for monitoring, updating merchant attributes, and removing merchants from monitoring. Integrating with the MDMX API enables users to streamline the process of providing and updating merchants within G2RS' system using their own internal platforms or tools. Additionally, utilizing the MDMX API can enhance risk analyst efficiency by eliminating the need for portal-based file uploads.
+Sources:
+- query_log.txt
+- G2 - MDMX API Implementation Guide 1.pdf
+
+[2025-07-31 00:44:42]
+Q: what does the mdmx api do
+A: The MDMX API allows users to manage their G2 Risk Solutions (G2RS) merchant monitoring portfolio. This includes tasks such as submitting merchants for monitoring, updating merchant attributes, and removing merchants from monitoring. Integrating with the MDMX API enables users to streamline the process of providing and updating merchants within G2RS' system using their own internal platforms or tools. Additionally, utilizing the MDMX API can enhance risk analyst efficiency by eliminating the need for portal-based file uploads.
+Sources:
+- query_log.txt
+- G2 - MDMX API Implementation Guide 1.pdf
+
+[2025-07-31 11:27:58]
+Q: what does the mdmx api do
+A: The MDMX API allows users to manage their G2 Risk Solutions (G2RS) merchant monitoring portfolio. This includes tasks such as submitting merchants for monitoring, updating merchant attributes, and removing merchants from monitoring. Integrating with the MDMX API enables users to streamline the process of providing and updating merchants within G2RS' system using their own internal platforms or tools. Additionally, utilizing the MDMX API can enhance risk analyst efficiency by eliminating the need for portal-based file uploads.
+Sources:
+- query_log.txt
+- G2 - MDMX API Implementation Guide 1.pdf
+
+[2025-07-31 13:33:23]
+Q: what does the mdmx api do
+A: The MDMX API allows users to manage their G2 Risk Solutions (G2RS) merchant monitoring portfolio. This involves tasks such as submitting merchants for monitoring, updating merchant attributes, and removing merchants from monitoring. Integrating with the MDMX API enables users to streamline the process of providing and updating merchants within G2RS' system using their own internal platforms or tools. Additionally, utilizing the MDMX API can enhance risk analyst efficiency by eliminating the need for portal-based file uploads.
+Sources:
+- query_log.txt
+- G2 - MDMX API Implementation Guide 1.pdf
+
+[2025-07-31 14:11:37]
+Q: what does the mdmx api do
+A: The MDMX API allows users to manage their G2 Risk Solutions (G2RS) merchant monitoring portfolio. This involves tasks such as submitting merchants for monitoring, updating merchant attributes, and removing merchants from monitoring. Integrating with the MDMX API enables users to streamline the process of providing and updating merchants within G2RS' system using their own internal platforms or tools. Additionally, utilizing the MDMX API can enhance risk analyst efficiency by eliminating the need for portal-based file uploads.
+Sources:
+- query_log.txt
+
