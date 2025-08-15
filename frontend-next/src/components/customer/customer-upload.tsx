@@ -200,26 +200,26 @@ export default function CustomerUpload({ clientId, customerId }: CustomerUploadP
       <div
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
           isDragging
-            ? 'border-indigo-400 bg-indigo-50'
-            : 'border-gray-300 hover:border-gray-400'
+            ? 'border-indigo-400 bg-indigo-900/20'
+            : 'border-gray-600 hover:border-gray-500 bg-gray-800/50'
         }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        <DocumentArrowUpIcon className="mx-auto h-12 w-12 text-gray-400" />
+        <DocumentArrowUpIcon className="mx-auto h-12 w-12 text-gray-300" />
         <div className="mt-4">
-          <p className="text-lg font-medium text-gray-900">
+          <p className="text-lg font-medium text-white">
             Drop files here or{' '}
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="text-indigo-600 hover:text-indigo-500 font-medium"
+              className="text-indigo-400 hover:text-indigo-300 font-medium"
             >
               browse
             </button>
           </p>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-300 mt-1">
             Upload PDF, Word, Excel, or text files up to 10MB
           </p>
         </div>
@@ -237,18 +237,18 @@ export default function CustomerUpload({ clientId, customerId }: CustomerUploadP
       {/* Uploaded Files List */}
       {uploadedFiles.length > 0 && (
         <div className="mt-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Uploaded Files</h3>
+          <h3 className="text-lg font-medium text-white mb-4">Uploaded Files</h3>
           <div className="space-y-3">
             {uploadedFiles.map((file) => (
               <div
                 key={file.id}
-                className="bg-gray-50 rounded-lg p-4 flex items-center justify-between"
+                className="bg-gray-800 rounded-lg p-4 flex items-center justify-between border border-gray-700"
               >
                 <div className="flex items-center space-x-3">
                   <span className="text-2xl">{getFileIcon(file.type)}</span>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">{file.name}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-sm font-medium text-white">{file.name}</p>
+                    <p className="text-xs text-gray-300">
                       {formatFileSize(file.size)} • {file.type}
                     </p>
                   </div>
@@ -314,9 +314,9 @@ export default function CustomerUpload({ clientId, customerId }: CustomerUploadP
       )}
 
       {/* Help Text */}
-      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-        <h4 className="text-sm font-medium text-gray-900 mb-2">What happens after upload?</h4>
-        <ul className="text-sm text-gray-600 space-y-1">
+      <div className="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
+        <h4 className="text-sm font-medium text-white mb-2">What happens after upload?</h4>
+        <ul className="text-sm text-gray-300 space-y-1">
           <li>• Your documents are securely processed and analyzed</li>
           <li>• AI extracts key information and insights</li>
           <li>• You can ask questions about your documents in the chat</li>

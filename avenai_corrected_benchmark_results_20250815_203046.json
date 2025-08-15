@@ -1,0 +1,283 @@
+{
+  "benchmark_info": {
+    "platform": "Avenai Enterprise AI Platform",
+    "benchmark_date": "2025-08-15T20:30:46.109015",
+    "total_benchmark_time": 33.17562294006348,
+    "base_url": "http://localhost:8000",
+    "note": "Testing ACTUAL tenant-scoped endpoints"
+  },
+  "core_features": {
+    "/health": {
+      "endpoint": "/health",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0041196346282958984,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/analytics/dashboard": {
+      "endpoint": "/api/v1/analytics/dashboard",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0009958744049072266,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/documents": {
+      "endpoint": "/api/v1/documents",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0013298988342285156,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/ai-chat/chat": {
+      "endpoint": "/api/v1/ai-chat/chat",
+      "method": "POST",
+      "status_code": 422,
+      "response_time": 0.0012316703796386719,
+      "success": false,
+      "error": null
+    }
+  },
+  "ai_features": {
+    "/api/v1/enterprise/tenants/test_tenant_123/ai/models": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/ai/models",
+      "method": "GET",
+      "status_code": 405,
+      "response_time": 0.001293182373046875,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/ai/insights": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/ai/insights",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0009331703186035156,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/ai/workflows": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/ai/workflows",
+      "method": "GET",
+      "status_code": 405,
+      "response_time": 0.0003972053527832031,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/ml/models": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/ml/models",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0008780956268310547,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/ml/training": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/ml/training",
+      "method": "GET",
+      "status_code": 405,
+      "response_time": 0.0012059211730957031,
+      "success": false,
+      "error": null
+    }
+  },
+  "collaboration_features": {
+    "/api/v1/enterprise/tenants/test_tenant_123/collaboration/sessions": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/collaboration/sessions",
+      "method": "POST",
+      "status_code": 422,
+      "response_time": 0.0052030086517333984,
+      "success": false,
+      "error": null
+    }
+  },
+  "enterprise_features": {
+    "/api/v1/enterprise/tenants/test_tenant_123/security/audit": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/security/audit",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0006968975067138672,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/security/policies": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/security/policies",
+      "method": "GET",
+      "status_code": 405,
+      "response_time": 0.0009260177612304688,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/security/dashboard": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/security/dashboard",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0007262229919433594,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/compliance/status": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/compliance/status",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0008149147033691406,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/compliance/frameworks": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/compliance/frameworks",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0005450248718261719,
+      "success": true,
+      "error": null
+    }
+  },
+  "advanced_platform_features": {
+    "/api/v1/enterprise/tenants/test_tenant_123/analytics/advanced": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/analytics/advanced",
+      "method": "GET",
+      "status_code": 405,
+      "response_time": 0.0006198883056640625,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/analytics/business-intelligence": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/analytics/business-intelligence",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.00084686279296875,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/analytics/predictive": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/analytics/predictive",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.00041294097900390625,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/performance/advanced": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/performance/advanced",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0006248950958251953,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/scale/global": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/scale/global",
+      "method": "GET",
+      "status_code": 405,
+      "response_time": 0.0009160041809082031,
+      "success": false,
+      "error": null
+    }
+  },
+  "final_platform_features": {
+    "/api/v1/enterprise/tenants/test_tenant_123/workflows/custom": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/workflows/custom",
+      "method": "GET",
+      "status_code": 405,
+      "response_time": 0.00047779083251953125,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/devops/pipelines": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/devops/pipelines",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0008161067962646484,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/infrastructure/production": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/infrastructure/production",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0010209083557128906,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/monitoring/production": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/monitoring/production",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0003750324249267578,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/enterprise/tenants/test_tenant_123/production/dashboard": {
+      "endpoint": "/api/v1/enterprise/tenants/test_tenant_123/production/dashboard",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0006647109985351562,
+      "success": true,
+      "error": null
+    }
+  },
+  "concurrent_load_tests": {
+    "/health": {
+      "endpoint": "/health",
+      "total_requests": 200,
+      "successful_requests": 200,
+      "success_rate": 100.0,
+      "avg_response_time": 0.0032694220542907717,
+      "min_response_time": 0.0004940032958984375,
+      "max_response_time": 0.006067037582397461,
+      "median_response_time": 0.0034025907516479492,
+      "p95_response_time": 0.0049719572067260746,
+      "throughput": 32965.0174873266
+    },
+    "/api/v1/analytics/dashboard": {
+      "endpoint": "/api/v1/analytics/dashboard",
+      "total_requests": 200,
+      "successful_requests": 200,
+      "success_rate": 100.0,
+      "avg_response_time": 0.0034745168685913087,
+      "min_response_time": 0.0004220008850097656,
+      "max_response_time": 0.007089853286743164,
+      "median_response_time": 0.003696918487548828,
+      "p95_response_time": 0.006244683265686035,
+      "throughput": 28209.328446043648
+    },
+    "/api/v1/documents": {
+      "endpoint": "/api/v1/documents",
+      "total_requests": 200,
+      "successful_requests": 200,
+      "success_rate": 100.0,
+      "avg_response_time": 0.004237108230590821,
+      "min_response_time": 0.0006802082061767578,
+      "max_response_time": 0.011979818344116211,
+      "median_response_time": 0.0031069517135620117,
+      "p95_response_time": 0.011341774463653564,
+      "throughput": 16694.74396481382
+    }
+  },
+  "sustained_load_test": {
+    "endpoint": "/health",
+    "test_duration": 30.007132291793823,
+    "total_requests": 1423,
+    "successful_requests": 1423,
+    "success_rate": 100.0,
+    "actual_rps": 47.42205906790879,
+    "target_rps": 50,
+    "avg_response_time": 0.0018302293537539322,
+    "min_response_time": 0.0006301403045654297,
+    "max_response_time": 0.07112932205200195,
+    "p95_response_time": 0.0027588367462158202,
+    "p99_response_time": 0.003750133514404297
+  },
+  "summary": {
+    "total_endpoints_tested": 25,
+    "overall_avg_response_time": 0.0009875744581222534,
+    "overall_min_response_time": 0.0003750324249267578,
+    "overall_max_response_time": 0.0041196346282958984,
+    "overall_median_response_time": 0.0008155107498168945,
+    "overall_p95_response_time": 0.0041196346282958984,
+    "overall_success_rate": 0,
+    "performance_grade": "F"
+  }
+}

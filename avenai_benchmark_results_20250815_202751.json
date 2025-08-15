@@ -1,0 +1,266 @@
+{
+  "benchmark_info": {
+    "platform": "Avenai Enterprise AI Platform",
+    "benchmark_date": "2025-08-15T20:27:51.084650",
+    "total_benchmark_time": 33.1738760471344,
+    "base_url": "http://localhost:8000"
+  },
+  "core_features": {
+    "/health": {
+      "endpoint": "/health",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0076749324798583984,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/analytics/dashboard": {
+      "endpoint": "/api/v1/analytics/dashboard",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0006821155548095703,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/documents": {
+      "endpoint": "/api/v1/documents",
+      "method": "GET",
+      "status_code": 200,
+      "response_time": 0.0012087821960449219,
+      "success": true,
+      "error": null
+    },
+    "/api/v1/ai-chat/chat": {
+      "endpoint": "/api/v1/ai-chat/chat",
+      "method": "POST",
+      "status_code": 422,
+      "response_time": 0.0012679100036621094,
+      "success": false,
+      "error": null
+    }
+  },
+  "ai_features": {
+    "/api/v1/ai/models": {
+      "endpoint": "/api/v1/ai/models",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0007128715515136719,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/ai-chat/chat/enhanced": {
+      "endpoint": "/api/v1/ai-chat/chat/enhanced",
+      "method": "POST",
+      "status_code": 404,
+      "response_time": 0.0006039142608642578,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/ai/insights/generate": {
+      "endpoint": "/api/v1/ai/insights/generate",
+      "method": "POST",
+      "status_code": 404,
+      "response_time": 0.0003802776336669922,
+      "success": false,
+      "error": null
+    }
+  },
+  "collaboration_features": {
+    "/api/v1/collaboration/sessions": {
+      "endpoint": "/api/v1/collaboration/sessions",
+      "method": "POST",
+      "status_code": 404,
+      "response_time": 0.001087188720703125,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/collaboration/documents/content": {
+      "endpoint": "/api/v1/collaboration/documents/content",
+      "method": "POST",
+      "status_code": 404,
+      "response_time": 0.0004458427429199219,
+      "success": false,
+      "error": null
+    }
+  },
+  "enterprise_features": {
+    "/api/v1/security/audit-logs": {
+      "endpoint": "/api/v1/security/audit-logs",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0008392333984375,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/security/policies": {
+      "endpoint": "/api/v1/security/policies",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.00039386749267578125,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/compliance/reports": {
+      "endpoint": "/api/v1/compliance/reports",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.001280069351196289,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/integrations/webhooks": {
+      "endpoint": "/api/v1/integrations/webhooks",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0005009174346923828,
+      "success": false,
+      "error": null
+    }
+  },
+  "advanced_platform_features": {
+    "/api/v1/advanced-tenants": {
+      "endpoint": "/api/v1/advanced-tenants",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0008950233459472656,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/advanced-reports": {
+      "endpoint": "/api/v1/advanced-reports",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0010149478912353516,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/business-intelligence": {
+      "endpoint": "/api/v1/business-intelligence",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.000408172607421875,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/advanced-user-roles": {
+      "endpoint": "/api/v1/advanced-user-roles",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0008649826049804688,
+      "success": false,
+      "error": null
+    }
+  },
+  "final_platform_features": {
+    "/api/v1/workflow-automation": {
+      "endpoint": "/api/v1/workflow-automation",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0010559558868408203,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/business-processes": {
+      "endpoint": "/api/v1/business-processes",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0003902912139892578,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/data-pipelines": {
+      "endpoint": "/api/v1/data-pipelines",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0006608963012695312,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/ml-pipelines": {
+      "endpoint": "/api/v1/ml-pipelines",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.00031280517578125,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/third-party-integrations": {
+      "endpoint": "/api/v1/third-party-integrations",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0007767677307128906,
+      "success": false,
+      "error": null
+    },
+    "/api/v1/api-ecosystems": {
+      "endpoint": "/api/v1/api-ecosystems",
+      "method": "GET",
+      "status_code": 404,
+      "response_time": 0.0005769729614257812,
+      "success": false,
+      "error": null
+    }
+  },
+  "concurrent_load_tests": {
+    "/health": {
+      "endpoint": "/health",
+      "total_requests": 200,
+      "successful_requests": 200,
+      "success_rate": 100.0,
+      "avg_response_time": 0.0029500865936279296,
+      "min_response_time": 0.00041222572326660156,
+      "max_response_time": 0.007665157318115234,
+      "median_response_time": 0.0026999711990356445,
+      "p95_response_time": 0.006167554855346679,
+      "throughput": 26092.0933125972
+    },
+    "/api/v1/analytics/dashboard": {
+      "endpoint": "/api/v1/analytics/dashboard",
+      "total_requests": 200,
+      "successful_requests": 200,
+      "success_rate": 100.0,
+      "avg_response_time": 0.003138350248336792,
+      "min_response_time": 0.0006258487701416016,
+      "max_response_time": 0.006582021713256836,
+      "median_response_time": 0.0029134750366210938,
+      "p95_response_time": 0.00561373233795166,
+      "throughput": 30385.800702720324
+    },
+    "/api/v1/documents": {
+      "endpoint": "/api/v1/documents",
+      "total_requests": 200,
+      "successful_requests": 200,
+      "success_rate": 100.0,
+      "avg_response_time": 0.0039438939094543456,
+      "min_response_time": 0.0005476474761962891,
+      "max_response_time": 0.014509201049804688,
+      "median_response_time": 0.0026177167892456055,
+      "p95_response_time": 0.013773226737976074,
+      "throughput": 13784.356513737348
+    }
+  },
+  "sustained_load_test": {
+    "endpoint": "/health",
+    "test_duration": 30.014241933822632,
+    "total_requests": 1400,
+    "successful_requests": 1400,
+    "success_rate": 100.0,
+    "actual_rps": 46.644523059646545,
+    "target_rps": 50,
+    "avg_response_time": 0.0018701520987919398,
+    "min_response_time": 0.0006320476531982422,
+    "max_response_time": 0.009966135025024414,
+    "p95_response_time": 0.002923727035522461,
+    "p99_response_time": 0.004272060394287109
+  },
+  "summary": {
+    "total_endpoints_tested": 23,
+    "overall_avg_response_time": 0.003188610076904297,
+    "overall_min_response_time": 0.0006821155548095703,
+    "overall_max_response_time": 0.0076749324798583984,
+    "overall_median_response_time": 0.0012087821960449219,
+    "overall_p95_response_time": 0.0076749324798583984,
+    "overall_success_rate": 0,
+    "performance_grade": "F"
+  }
+}

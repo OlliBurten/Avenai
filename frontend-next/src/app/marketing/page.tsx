@@ -276,13 +276,22 @@ export default function MarketingLanding() {
                   ))}
                 </ul>
 
-                <button className={`w-full py-3 px-6 rounded-lg font-medium transition-colors ${
-                  plan.popular
-                    ? 'bg-indigo-600 text-white hover:bg-indigo-700'
-                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                }`}>
-                  {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
-                </button>
+                {plan.name === 'Enterprise' ? (
+                  <button className="w-full py-3 px-6 rounded-lg font-medium transition-colors bg-gray-100 text-gray-900 hover:bg-gray-200">
+                    Contact Sales
+                  </button>
+                ) : (
+                  <a
+                    href="/signup"
+                    className={`w-full py-3 px-6 rounded-lg font-medium transition-colors inline-block text-center ${
+                      plan.popular
+                        ? 'bg-indigo-600 text-white hover:bg-gray-700'
+                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    }`}
+                  >
+                    Get Started
+                  </a>
+                )}
               </div>
             ))}
           </div>
@@ -299,25 +308,20 @@ export default function MarketingLanding() {
             Join hundreds of businesses already using Avenai AI to deliver exceptional value to their customers
           </p>
           
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-            <div className="flex gap-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
-                required
-              />
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="bg-white text-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors disabled:opacity-50"
-              >
-                {isSubmitting ? 'Sending...' : 'Get Started'}
-              </button>
-            </div>
-          </form>
+          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <a
+              href="/signup"
+              className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors text-center"
+            >
+              Create Account
+            </a>
+            <a
+              href="/client"
+              className="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-indigo-600 transition-colors text-center"
+            >
+              View Demo
+            </a>
+          </div>
           
           <p className="text-indigo-200 text-sm mt-4">
             No credit card required • 14-day free trial

@@ -1,0 +1,202 @@
+{
+  "test_info": {
+    "platform": "Avenai Enterprise AI Platform",
+    "test_date": "2025-08-15T20:44:33.862320",
+    "total_test_time": 3.041415214538574,
+    "base_urls": {
+      "marketing": "https://avenai.io",
+      "marketing_www": "https://www.avenai.io",
+      "backend": "https://api.avenai.io",
+      "frontend": "https://avenai-black.vercel.app"
+    }
+  },
+  "test_results": {
+    "marketing": {
+      "avenai_io": {
+        "name": "Marketing Site (avenai.io)",
+        "url": "https://avenai.io",
+        "status_code": 200,
+        "response_time": 0.18830490112304688,
+        "content_length": 25568,
+        "success": true,
+        "error": null
+      },
+      "www_avenai_io": {
+        "name": "Marketing Site (www.avenai.io)",
+        "url": "https://www.avenai.io",
+        "status_code": 200,
+        "response_time": 0.3318519592285156,
+        "content_length": 25568,
+        "success": true,
+        "error": null
+      }
+    },
+    "backend": {
+      "health": {
+        "name": "Health Check",
+        "url": "https://api.avenai.io/health",
+        "status_code": 200,
+        "response_time": 0.25835704803466797,
+        "content_length": 379,
+        "success": true,
+        "error": null
+      },
+      "analytics_dashboard": {
+        "name": "Analytics Dashboard",
+        "url": "https://api.avenai.io/api/v1/analytics/dashboard",
+        "status_code": 200,
+        "response_time": 0.030282020568847656,
+        "content_length": 383,
+        "success": true,
+        "error": null
+      },
+      "documents": {
+        "name": "Documents API",
+        "url": "https://api.avenai.io/api/v1/documents",
+        "status_code": 200,
+        "response_time": 0.025906801223754883,
+        "content_length": 57,
+        "success": true,
+        "error": null
+      },
+      "ai_chat": {
+        "name": "AI Chat API",
+        "url": "https://api.avenai.io/api/v1/ai-chat/chat",
+        "status_code": 422,
+        "response_time": 0.027762889862060547,
+        "content_length": 175,
+        "success": true,
+        "error": null
+      },
+      "ai_models": {
+        "name": "AI Models API",
+        "url": "https://api.avenai.io/api/v1/ai/models",
+        "status_code": 200,
+        "response_time": 0.033895254135131836,
+        "content_length": 613,
+        "success": true,
+        "error": null
+      }
+    },
+    "frontend": {
+      "frontend_main": {
+        "name": "Frontend App",
+        "url": "https://avenai-black.vercel.app",
+        "status_code": 200,
+        "response_time": 0.192274808883667,
+        "content_length": 25568,
+        "success": true,
+        "error": null
+      },
+      "frontend_dashboard": {
+        "name": "Dashboard Page",
+        "url": "https://avenai-black.vercel.app/dashboard",
+        "status_code": 200,
+        "response_time": 0.3526747226715088,
+        "content_length": 45770,
+        "success": true,
+        "error": null
+      },
+      "frontend_upload": {
+        "name": "Upload Page",
+        "url": "https://avenai-black.vercel.app/upload",
+        "status_code": 200,
+        "response_time": 0.4082801342010498,
+        "content_length": 47970,
+        "success": true,
+        "error": null
+      },
+      "frontend_enhanced_ai": {
+        "name": "Enhanced AI Chat",
+        "url": "https://avenai-black.vercel.app/enhanced-ai-chat",
+        "status_code": 200,
+        "response_time": 0.34114503860473633,
+        "content_length": 17101,
+        "success": true,
+        "error": null
+      },
+      "frontend_collaboration": {
+        "name": "Collaboration",
+        "url": "https://avenai-black.vercel.app/collaboration",
+        "status_code": 200,
+        "response_time": 0.37598180770874023,
+        "content_length": 11048,
+        "success": true,
+        "error": null
+      },
+      "frontend_enterprise": {
+        "name": "Enterprise",
+        "url": "https://avenai-black.vercel.app/enterprise",
+        "status_code": 200,
+        "response_time": 0.31511592864990234,
+        "content_length": 19331,
+        "success": true,
+        "error": null
+      }
+    },
+    "advanced": {
+      "tenant_ai_insights": {
+        "name": "Tenant AI Insights",
+        "url": "https://api.avenai.io/api/v1/enterprise/tenants/test_tenant_123/ai/insights",
+        "status_code": 200,
+        "response_time": 0.027608871459960938,
+        "content_length": 1375,
+        "success": true,
+        "error": null
+      },
+      "tenant_ml_models": {
+        "name": "Tenant ML Models",
+        "url": "https://api.avenai.io/api/v1/enterprise/tenants/test_tenant_123/ml/models",
+        "status_code": 200,
+        "response_time": 0.02549123764038086,
+        "content_length": 916,
+        "success": true,
+        "error": null
+      },
+      "tenant_security_audit": {
+        "name": "Tenant Security Audit",
+        "url": "https://api.avenai.io/api/v1/enterprise/tenants/test_tenant_123/security/audit",
+        "status_code": 200,
+        "response_time": 0.025796890258789062,
+        "content_length": 783,
+        "success": true,
+        "error": null
+      },
+      "tenant_compliance_status": {
+        "name": "Tenant Compliance Status",
+        "url": "https://api.avenai.io/api/v1/enterprise/tenants/test_tenant_123/compliance/status",
+        "status_code": 200,
+        "response_time": 0.026500940322875977,
+        "content_length": 737,
+        "success": true,
+        "error": null
+      }
+    },
+    "upload": {
+      "upload_endpoint": {
+        "name": "Upload Endpoint",
+        "url": "https://api.avenai.io/api/v1/documents/upload",
+        "status_code": 422,
+        "response_time": 0.0253751277923584,
+        "content_length": 89,
+        "success": true,
+        "error": null
+      }
+    },
+    "cors": {
+      "cors_test": {
+        "name": "CORS Configuration",
+        "success": true,
+        "cors_headers": "https://avenai-black.vercel.app",
+        "error": null
+      }
+    }
+  },
+  "summary": {
+    "total_tests": 19,
+    "passed_tests": 19,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "overall_status": "\ud83d\udfe2 EXCELLENT"
+  }
+}

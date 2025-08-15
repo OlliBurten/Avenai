@@ -128,7 +128,7 @@ export default function CustomerChat({ clientId, customerId }: CustomerChatProps
               className={`max-w-xs lg:max-w-md xl:max-w-lg px-4 py-2 rounded-lg ${
                 message.role === 'user'
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-100 text-gray-900'
+                  : 'bg-gray-800 text-white border border-gray-700'
               }`}
             >
               <div className="flex items-start space-x-2">
@@ -168,10 +168,10 @@ export default function CustomerChat({ clientId, customerId }: CustomerChatProps
         
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 text-gray-900 px-4 py-2 rounded-lg">
+            <div className="bg-gray-800 text-white px-4 py-2 rounded-lg border border-gray-700">
               <div className="flex items-center space-x-2">
                 <div className="animate-pulse">
-                  <SparklesIcon className="h-4 w-4 text-indigo-600" />
+                  <SparklesIcon className="h-4 w-4 text-indigo-400" />
                 </div>
                 <div className="flex space-x-1">
                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
@@ -187,7 +187,7 @@ export default function CustomerChat({ clientId, customerId }: CustomerChatProps
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-gray-200 p-4">
+      <div className="border-t border-gray-700 p-4">
         <div className="flex items-end space-x-3">
           <div className="flex-1">
             <textarea
@@ -195,7 +195,7 @@ export default function CustomerChat({ clientId, customerId }: CustomerChatProps
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask me anything about your documents or business..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-600 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
               rows={2}
               disabled={isLoading}
             />
@@ -210,7 +210,7 @@ export default function CustomerChat({ clientId, customerId }: CustomerChatProps
           </button>
         </div>
         
-        <div className="mt-2 flex items-center justify-between text-xs text-gray-500">
+        <div className="mt-2 flex items-center justify-between text-xs text-gray-400">
           <span>Press Enter to send, Shift+Enter for new line</span>
           <span>{inputMessage.length}/1000</span>
         </div>
