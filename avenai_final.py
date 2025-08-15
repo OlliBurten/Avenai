@@ -673,7 +673,7 @@ app = FastAPI(
 )
 
 # Enhanced CORS configuration for production
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:3001").split(",")
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:3001,https://avenai-diyql7fji-olliburtens-projects.vercel.app,https://avenai.vercel.app").split(",")
 ALLOWED_ORIGINS = [origin.strip() for origin in ALLOWED_ORIGINS if origin.strip()]
 
 app.add_middleware(
