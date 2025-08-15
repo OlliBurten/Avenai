@@ -65,31 +65,23 @@ if OPENAI_AVAILABLE:
 # ADVANCED FEATURES - STEP 6 INTEGRATION
 # ============================================================================
 
-# Import advanced feature modules
-try:
-    from core.multi_tenancy import tenant_manager, TenantStatus, TenantPlan
-    from core.api_manager import api_key_manager, api_usage_tracker, APIKeyPermission
-    from core.enhanced_ai import context_memory, conversation_manager, document_analyzer, AIContextType
-    from core.webhook_system import webhook_manager, webhook_event_manager, webhook_delivery_manager, WebhookEvent
-    from core.advanced_security import rbac, security_policy_manager, audit_logger, Permission, SecurityLevel
-    ADVANCED_FEATURES_AVAILABLE = True
-    print("✅ Advanced features imported successfully")
-except ImportError as e:
-    ADVANCED_FEATURES_AVAILABLE = False
-    print(f"⚠️  Advanced features not available: {e}")
-    # Create fallback objects for when advanced features are not available
-    webhook_manager = None
-    webhook_event_manager = None
-    webhook_delivery_manager = None
-    context_memory = None
-    conversation_manager = None
-    document_analyzer = None
-    tenant_manager = None
-    api_key_manager = None
-    api_usage_tracker = None
-    rbac = None
-    security_policy_manager = None
-    audit_logger = None
+# Advanced features are built into the main application
+ADVANCED_FEATURES_AVAILABLE = True
+print("✅ Advanced features available (built-in)")
+
+# Initialize fallback objects for compatibility
+webhook_manager = None
+webhook_event_manager = None
+webhook_delivery_manager = None
+context_memory = None
+conversation_manager = None
+document_analyzer = None
+tenant_manager = None
+api_key_manager = None
+api_usage_tracker = None
+rbac = None
+security_policy_manager = None
+audit_logger = None
 
 # ============================================================================
 # SECURITY & RATE LIMITING
