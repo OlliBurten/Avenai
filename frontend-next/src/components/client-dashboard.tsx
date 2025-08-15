@@ -151,6 +151,7 @@ export default function ClientDashboard() {
             {[
               { id: 'overview', name: 'Overview', icon: ChartBarIcon },
               { id: 'users', name: 'Team Members', icon: UsersIcon },
+              { id: 'customers', name: 'Customers', icon: UsersIcon },
               { id: 'documents', name: 'Documents', icon: DocumentTextIcon },
               { id: 'chat', name: 'AI Chat', icon: ChatBubbleLeftRightIcon },
               { id: 'settings', name: 'Settings', icon: CogIcon }
@@ -320,6 +321,42 @@ export default function ClientDashboard() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'customers' && (
+          <div className="bg-white rounded-lg shadow">
+            <div className="px-6 py-4 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-medium text-gray-900">Customer Management</h3>
+                <div className="flex items-center space-x-3">
+                  <p className="text-sm text-gray-500">
+                    Manage your customers and their access to AI services
+                  </p>
+                  <a
+                    href="/client/customers"
+                    className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700"
+                  >
+                    Manage Customers
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="p-6">
+              <div className="text-center py-8">
+                <UsersIcon className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Customer Portal Ready</h3>
+                <p className="text-gray-600 mb-4">
+                  Your customers can access AI services through your branded portal
+                </p>
+                <div className="bg-gray-50 rounded-lg p-4 text-sm text-gray-600">
+                  <p className="font-medium mb-2">Customer Portal URL:</p>
+                  <code className="bg-white px-2 py-1 rounded border">
+                    {typeof window !== 'undefined' ? `${window.location.origin}/customer/${companyId}` : '/customer/[company-id]'}
+                  </code>
+                </div>
+              </div>
             </div>
           </div>
         )}
