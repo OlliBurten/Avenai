@@ -1,5 +1,4 @@
 {
-  "comment": "Vercel configuration for Avenai frontend",
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
