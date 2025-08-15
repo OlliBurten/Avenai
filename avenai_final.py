@@ -880,6 +880,12 @@ COLLABORATION_SESSIONS = {}  # session_id -> session_data
 COLLABORATION_DOCUMENTS = {}  # document_id -> collaboration_data
 REAL_TIME_CHAT = {}  # session_id -> chat_messages
 
+# Advanced collaboration features
+COLLABORATIVE_DOCUMENTS = {}  # document_id -> document_content
+DOCUMENT_VERSIONS = {}  # document_id -> version_history
+COLLABORATION_PERMISSIONS = {}  # session_id -> user_permissions
+FILE_SHARING = {}  # file_id -> sharing_data
+
 def get_intelligent_fallback_response(user_message: str, document_context: str = None) -> str:
     """Intelligent fallback when OpenAI is unavailable"""
     
@@ -1948,6 +1954,91 @@ async def process_collaboration_message(session_id: str, user_id: str, message_d
         # Broadcast to other users (exclude sender)
         await connection_manager.broadcast_to_session(session_id, typing_data, exclude_websocket=websocket)
     
+    elif message_type == "document_content_update":
+        # Handle real-time document content updates
+        doc_id = message_data.get("document_id")
+        content = message_data.get("content", "")
+        change_type = message_data.get("change_type", "text_edit")
+        
+        if doc_id:
+            # Update document content
+            if doc_id not in COLLABORATIVE_DOCUMENTS:
+                COLLABORATIVE_DOCUMENTS[doc_id] = {
+                    "id": doc_id,
+                    "content": "",
+                    "created_at": datetime.now().isoformat(),
+                    "updated_at": datetime.now().isoformat(),
+                    "created_by": user_id,
+                    "version": 1
+                }
+            
+            # Create new version
+            current_version = COLLABORATIVE_DOCUMENTS[doc_id]["version"]
+            new_version = current_version + 1
+            
+            # Store version history
+            if doc_id not in DOCUMENT_VERSIONS:
+                DOCUMENT_VERSIONS[doc_id] = []
+            
+            version_entry = {
+                "version": current_version,
+                "content": COLLABORATIVE_DOCUMENTS[doc_id]["content"],
+                "changed_by": user_id,
+                "timestamp": datetime.now().isoformat(),
+                "change_type": change_type
+            }
+            
+            DOCUMENT_VERSIONS[doc_id].append(version_entry)
+            
+            # Update current document
+            COLLABORATIVE_DOCUMENTS[doc_id].update({
+                "content": content,
+                "updated_at": datetime.now().isoformat(),
+                "updated_by": user_id,
+                "version": new_version
+            })
+            
+            # Broadcast update to all users in session
+            await connection_manager.broadcast_to_session(session_id, {
+                "type": "document_content_updated",
+                "document_id": doc_id,
+                "user_id": user_id,
+                "content": content,
+                "version": new_version,
+                "timestamp": datetime.now().isoformat(),
+                "change_type": change_type
+            })
+            
+            print(f"📝 Real-time document update: {doc_id} to version {new_version} by {user_id}")
+    
+    elif message_type == "cursor_position":
+        # Handle cursor position updates for collaborative editing
+        cursor_data = {
+            "type": "cursor_position",
+            "user_id": user_id,
+            "document_id": message_data.get("document_id"),
+            "position": message_data.get("position", {}),
+            "timestamp": datetime.now().isoformat(),
+            "session_id": session_id
+        }
+        
+        # Broadcast to other users (exclude sender)
+        await connection_manager.broadcast_to_session(session_id, cursor_data, exclude_websocket=websocket)
+    
+    elif message_type == "selection_change":
+        # Handle text selection changes
+        selection_data = {
+            "type": "selection_change",
+            "user_id": user_id,
+            "document_id": message_data.get("document_id"),
+            "selection": message_data.get("selection", {}),
+            "timestamp": datetime.now().isoformat(),
+            "session_id": session_id
+        }
+        
+        # Broadcast to other users (exclude sender)
+        await connection_manager.broadcast_to_session(session_id, selection_data, exclude_websocket=websocket)
+    
     else:
         print(f"⚠️  Unknown message type: {message_type}")
 
@@ -2074,6 +2165,349 @@ async def join_collaboration_session(
         "active_users": session_info["active_users"],
         "connected_users": session_info["users"],
         "websocket_url": f"ws://localhost:8000/ws/collaboration/{session_id}"
+    }
+
+# ============================================================================
+# ADVANCED COLLABORATION FEATURES - PHASE 3
+# ============================================================================
+
+@app.post("/api/v1/collaboration/documents/{document_id}/content")
+async def update_document_content(
+    document_id: str,
+    content: str = Form(...),
+    user_id: str = Form(...),
+    session_id: str = Form(...),
+    change_type: str = Form("text_edit"),  # text_edit, formatting, comment
+    _: bool = Depends(rate_limit_dependency)
+):
+    """Update collaborative document content with version control"""
+    
+    if document_id not in COLLABORATIVE_DOCUMENTS:
+        COLLABORATIVE_DOCUMENTS[document_id] = {
+            "id": document_id,
+            "content": "",
+            "created_at": datetime.now().isoformat(),
+            "updated_at": datetime.now().isoformat(),
+            "created_by": user_id,
+            "version": 1
+        }
+    
+    # Create new version
+    current_version = COLLABORATIVE_DOCUMENTS[document_id]["version"]
+    new_version = current_version + 1
+    
+    # Store version history
+    if document_id not in DOCUMENT_VERSIONS:
+        DOCUMENT_VERSIONS[document_id] = []
+    
+    version_entry = {
+        "version": current_version,
+        "content": COLLABORATIVE_DOCUMENTS[document_id]["content"],
+        "changed_by": user_id,
+        "timestamp": datetime.now().isoformat(),
+        "change_type": change_type
+    }
+    
+    DOCUMENT_VERSIONS[document_id].append(version_entry)
+    
+    # Update current document
+    COLLABORATIVE_DOCUMENTS[document_id].update({
+        "content": content,
+        "updated_at": datetime.now().isoformat(),
+        "updated_by": user_id,
+        "version": new_version
+    })
+    
+    # Broadcast change to all users in session
+    await connection_manager.broadcast_to_session(session_id, {
+        "type": "document_content_updated",
+        "document_id": document_id,
+        "user_id": user_id,
+        "version": new_version,
+        "timestamp": datetime.now().isoformat(),
+        "change_type": change_type
+    })
+    
+    print(f"📝 Document {document_id} updated to version {new_version} by {user_id}")
+    
+    return {
+        "document_id": document_id,
+        "version": new_version,
+        "updated_at": COLLABORATIVE_DOCUMENTS[document_id]["updated_at"],
+        "message": "Document updated successfully"
+    }
+
+@app.get("/api/v1/collaboration/documents/{document_id}/content")
+async def get_document_content(document_id: str):
+    """Get current document content and version info"""
+    
+    if document_id not in COLLABORATIVE_DOCUMENTS:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+    doc = COLLABORATIVE_DOCUMENTS[document_id]
+    
+    return {
+        "document_id": document_id,
+        "content": doc["content"],
+        "version": doc["version"],
+        "updated_at": doc["updated_at"],
+        "updated_by": doc.get("updated_by", doc["created_by"])
+    }
+
+@app.get("/api/v1/collaboration/documents/{document_id}/versions")
+async def get_document_versions(document_id: str, limit: int = 20):
+    """Get document version history"""
+    
+    if document_id not in DOCUMENT_VERSIONS:
+        return {"versions": [], "total": 0}
+    
+    versions = DOCUMENT_VERSIONS[document_id][-limit:]
+    
+    return {
+        "document_id": document_id,
+        "versions": versions,
+        "total": len(DOCUMENT_VERSIONS[document_id]),
+        "current_version": COLLABORATIVE_DOCUMENTS.get(document_id, {}).get("version", 0)
+    }
+
+@app.post("/api/v1/collaboration/documents/{document_id}/restore")
+async def restore_document_version(
+    document_id: str,
+    version: int = Form(...),
+    user_id: str = Form(...),
+    session_id: str = Form(...),
+    _: bool = Depends(rate_limit_dependency)
+):
+    """Restore document to a previous version"""
+    
+    if document_id not in DOCUMENT_VERSIONS:
+        raise HTTPException(status_code=404, detail="Document version history not found")
+    
+    # Find the specified version
+    target_version = None
+    for v in DOCUMENT_VERSIONS[document_id]:
+        if v["version"] == version:
+            target_version = v
+            break
+    
+    if not target_version:
+        raise HTTPException(status_code=404, detail="Version not found")
+    
+    # Create new version with restored content
+    current_version = COLLABORATIVE_DOCUMENTS[document_id]["version"]
+    new_version = current_version + 1
+    
+    # Store current version in history
+    version_entry = {
+        "version": current_version,
+        "content": COLLABORATIVE_DOCUMENTS[document_id]["content"],
+        "changed_by": user_id,
+        "timestamp": datetime.now().isoformat(),
+        "change_type": "version_restore"
+    }
+    
+    DOCUMENT_VERSIONS[document_id].append(version_entry)
+    
+    # Restore content
+    COLLABORATIVE_DOCUMENTS[document_id].update({
+        "content": target_version["content"],
+        "updated_at": datetime.now().isoformat(),
+        "updated_by": user_id,
+        "version": new_version
+    })
+    
+    # Broadcast restoration to session
+    await connection_manager.broadcast_to_session(session_id, {
+        "type": "document_version_restored",
+        "document_id": document_id,
+        "user_id": user_id,
+        "restored_version": version,
+        "new_version": new_version,
+        "timestamp": datetime.now().isoformat()
+    })
+    
+    print(f"🔄 Document {document_id} restored to version {version} by {user_id}")
+    
+    return {
+        "document_id": document_id,
+        "restored_version": version,
+        "new_version": new_version,
+        "message": "Document version restored successfully"
+    }
+
+@app.post("/api/v1/collaboration/sessions/{session_id}/permissions")
+async def update_session_permissions(
+    session_id: str,
+    user_id: str = Form(...),
+    permission_level: str = Form(...),  # read, write, admin
+    granted_by: str = Form(...),
+    _: bool = Depends(rate_limit_dependency)
+):
+    """Update user permissions for a collaboration session"""
+    
+    if session_id not in COLLABORATION_SESSIONS:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    if session_id not in COLLABORATION_PERMISSIONS:
+        COLLABORATION_PERMISSIONS[session_id] = {}
+    
+    # Validate permission level
+    valid_permissions = ["read", "write", "admin"]
+    if permission_level not in valid_permissions:
+        raise HTTPException(status_code=400, detail=f"Invalid permission level. Must be one of: {valid_permissions}")
+    
+    # Update permissions
+    COLLABORATION_PERMISSIONS[session_id][user_id] = {
+        "level": permission_level,
+        "granted_by": granted_by,
+        "granted_at": datetime.now().isoformat(),
+        "updated_at": datetime.now().isoformat()
+    }
+    
+    print(f"🔐 Updated permissions for user {user_id} in session {session_id}: {permission_level}")
+    
+    return {
+        "session_id": session_id,
+        "user_id": user_id,
+        "permission_level": permission_level,
+        "message": "Permissions updated successfully"
+    }
+
+@app.get("/api/v1/collaboration/sessions/{session_id}/permissions")
+async def get_session_permissions(session_id: str):
+    """Get all user permissions for a collaboration session"""
+    
+    if session_id not in COLLABORATION_PERMISSIONS:
+        return {"permissions": {}, "message": "No permissions set for this session"}
+    
+    return {
+        "session_id": session_id,
+        "permissions": COLLABORATION_PERMISSIONS[session_id]
+    }
+
+@app.post("/api/v1/collaboration/files/share")
+async def share_file(
+    file_id: str = Form(...),
+    shared_by: str = Form(...),
+    shared_with: str = Form(...),  # user_id or "session_{id}"
+    permission: str = Form("read"),  # read, write, admin
+    expires_at: Optional[str] = Form(None),
+    _: bool = Depends(rate_limit_dependency)
+):
+    """Share a file with specific users or sessions"""
+    
+    sharing_id = f"share_{uuid.uuid4().hex[:12]}"
+    
+    sharing_data = {
+        "id": sharing_id,
+        "file_id": file_id,
+        "shared_by": shared_by,
+        "shared_with": shared_with,
+        "permission": permission,
+        "shared_at": datetime.now().isoformat(),
+        "expires_at": expires_at,
+        "status": "active"
+    }
+    
+    FILE_SHARING[sharing_id] = sharing_data
+    
+    print(f"📁 File {file_id} shared by {shared_by} with {shared_with}")
+    
+    return {
+        "sharing_id": sharing_id,
+        "file_id": file_id,
+        "shared_with": shared_with,
+        "permission": permission,
+        "expires_at": expires_at,
+        "message": "File shared successfully"
+    }
+
+@app.get("/api/v1/collaboration/files/shared")
+async def get_shared_files(user_id: str = None, session_id: str = None):
+    """Get files shared with a user or session"""
+    
+    shared_files = []
+    
+    for sharing_id, sharing_data in FILE_SHARING.items():
+        if sharing_data["status"] != "active":
+            continue
+            
+        # Check if expired
+        if sharing_data.get("expires_at"):
+            try:
+                expires_at = datetime.fromisoformat(sharing_data["expires_at"])
+                if datetime.now() > expires_at:
+                    sharing_data["status"] = "expired"
+                    continue
+            except:
+                pass
+        
+        # Filter by user or session
+        if user_id and sharing_data["shared_with"] == user_id:
+            shared_files.append(sharing_data)
+        elif session_id and sharing_data["shared_with"] == f"session_{session_id}":
+            shared_files.append(sharing_data)
+    
+    return {
+        "shared_files": shared_files,
+        "total": len(shared_files)
+    }
+
+@app.post("/api/v1/collaboration/sessions/{session_id}/comments")
+async def add_document_comment(
+    session_id: str,
+    document_id: str = Form(...),
+    user_id: str = Form(...),
+    comment: str = Form(...),
+    position: Optional[str] = Form(None),  # JSON string for comment position
+    _: bool = Depends(rate_limit_dependency)
+):
+    """Add a comment to a collaborative document"""
+    
+    comment_id = f"comment_{uuid.uuid4().hex[:12]}"
+    
+    comment_data = {
+        "id": comment_id,
+        "session_id": session_id,
+        "document_id": document_id,
+        "user_id": user_id,
+        "comment": comment,
+        "position": position,
+        "created_at": datetime.now().isoformat(),
+        "status": "active"
+    }
+    
+    # Store comment (in production, this would go to a database)
+    if session_id not in REAL_TIME_CHAT:
+        REAL_TIME_CHAT[session_id] = []
+    
+    REAL_TIME_CHAT[session_id].append({
+        "type": "document_comment",
+        "comment_id": comment_id,
+        "document_id": document_id,
+        "user_id": user_id,
+        "comment": comment,
+        "position": position,
+        "timestamp": datetime.now().isoformat()
+    })
+    
+    # Broadcast comment to session
+    await connection_manager.broadcast_to_session(session_id, {
+        "type": "document_comment_added",
+        "comment_id": comment_id,
+        "document_id": document_id,
+        "user_id": user_id,
+        "comment": comment,
+        "position": position,
+        "timestamp": datetime.now().isoformat()
+    })
+    
+    print(f"💬 Comment added to document {document_id} by {user_id}")
+    
+    return {
+        "comment_id": comment_id,
+        "document_id": document_id,
+        "message": "Comment added successfully"
     }
 
 @app.get("/api/v1/analytics/dashboard")
