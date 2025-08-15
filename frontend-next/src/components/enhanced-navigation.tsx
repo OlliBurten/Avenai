@@ -12,6 +12,7 @@ import {
   UsersIcon,
   Cog6ToothIcon,
   CogIcon,
+  ServerIcon,
   ArrowRightOnRectangleIcon,
   BellIcon,
   ShieldExclamationIcon
@@ -58,6 +59,7 @@ export default function EnhancedNavigation() {
     { name: 'Advanced Collaboration', href: '/advanced-collaboration', icon: DocumentTextIcon, badge: 'PHASE 3' },
     { name: 'Enterprise', href: '/enterprise', icon: ShieldExclamationIcon, badge: 'PHASE 4' },
     { name: 'AI Dashboard', href: '/ai-dashboard', icon: CogIcon, badge: 'PHASE 5' },
+    { name: 'Advanced Platform', href: '/advanced-platform', icon: ServerIcon, badge: 'PHASE 6' },
     { name: 'Admin', href: '/admin', icon: ShieldExclamationIcon },
     { name: 'Compliance', href: '/compliance', icon: DocumentTextIcon },
     { name: 'Webhooks', href: '/webhooks', icon: BellIcon },
