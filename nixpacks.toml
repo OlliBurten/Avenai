@@ -9,3 +9,7 @@ cmds = [
 
 [start]
 cmd = "python3 -m uvicorn avenai_final:app --host 0.0.0.0 --port $PORT"
+
+# Alternative start command format
+[start.cmd]
+cmd = "python3 -m uvicorn avenai_final:app --host 0.0.0.0 --port $PORT"
