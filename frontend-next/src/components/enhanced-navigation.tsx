@@ -52,6 +52,7 @@ export default function EnhancedNavigation() {
     { name: 'Upload', href: '/upload', icon: DocumentTextIcon },
     { name: 'Analysis', href: '/analysis', icon: ChartBarIcon },
     { name: 'AI Chat', href: '/ai-chat', icon: ChatBubbleLeftRightIcon },
+    { name: 'Enhanced AI Chat', href: '/enhanced-ai-chat', icon: ChatBubbleLeftRightIcon, badge: 'NEW' },
     { name: 'Admin', href: '/admin', icon: ShieldExclamationIcon },
     { name: 'Compliance', href: '/compliance', icon: DocumentTextIcon },
     { name: 'Webhooks', href: '/webhooks', icon: BellIcon },

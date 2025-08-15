@@ -353,8 +353,8 @@ def track_user_activity(user_id: str, action: str, details: dict = None):
         "details": details or {}
     })
 
-def track_ai_usage(user_id: str, session_id: str, message_count: int, document_count: int, response_time: float):
-    """Track AI chat usage for analytics"""
+def track_ai_usage(user_id: str, session_id: str, message_count: int, document_count: int, response_time: float, model_used: str = "gpt-4"):
+    """Track AI chat usage for analytics with model information"""
     timestamp = datetime.now().isoformat()
     
     if user_id not in ANALYTICS_DATA["ai_usage"]:
@@ -365,7 +365,8 @@ def track_ai_usage(user_id: str, session_id: str, message_count: int, document_c
         "session_id": session_id,
         "message_count": message_count,
         "document_count": document_count,
-        "response_time": response_time
+        "response_time": response_time,
+        "model_used": model_used
     })
 
 def track_document_usage(document_id: str, action: str, user_id: str):
@@ -503,12 +504,43 @@ def read_document_content(doc_id: str) -> Optional[str]:
 # AI RESPONSE GENERATION - CLEAN VERSION
 # ============================================================================
 
-def get_ai_response(user_message: str, document_context: str = None) -> str:
-    """Generate AI response using OpenAI or intelligent fallback"""
+# Enhanced AI Chat Configuration
+AI_MODELS = {
+    "gpt-4": {
+        "name": "GPT-4",
+        "provider": "openai",
+        "max_tokens": 4000,
+        "temperature": 0.7,
+        "description": "Most capable model, best for complex reasoning"
+    },
+    "gpt-3.5-turbo": {
+        "name": "GPT-3.5 Turbo",
+        "provider": "openai", 
+        "max_tokens": 4000,
+        "temperature": 0.7,
+        "description": "Fast and efficient, good for most tasks"
+    },
+    "claude-3-sonnet": {
+        "name": "Claude 3 Sonnet",
+        "provider": "anthropic",
+        "max_tokens": 4000,
+        "temperature": 0.7,
+        "description": "Excellent for analysis and writing"
+    }
+}
+
+# Conversation Memory Storage
+CONVERSATION_MEMORY = {}  # session_id -> conversation_history
+MAX_MEMORY_LENGTH = 20  # Keep last 20 messages for context
+
+def get_ai_response(user_message: str, document_context: str = None, session_id: str = None, model: str = "gpt-4") -> str:
+    """Generate AI response using OpenAI or intelligent fallback with enhanced features"""
     
     print(f"🔍 Processing message: {user_message[:50]}...")
     print(f"📚 OpenAI Available: {OPENAI_AVAILABLE}")
     print(f"📄 Document Context: {document_context}")
+    print(f"🧠 Session ID: {session_id}")
+    print(f"🤖 Selected Model: {model}")
     
     # If OpenAI is not available, use fallback
     if not OPENAI_AVAILABLE or not client:
@@ -516,69 +548,233 @@ def get_ai_response(user_message: str, document_context: str = None) -> str:
         return get_intelligent_fallback_response(user_message, document_context)
     
     try:
-        print("🚀 Attempting OpenAI API call...")
+        print("🚀 Attempting OpenAI API call with enhanced features...")
         
-        # Build context from documents
-        context_text = ""
-        if document_context:
-            # Handle both string and list formats
-            if isinstance(document_context, str):
-                if document_context.strip():
-                    # If it's a comma-separated string, split it
-                    doc_ids = [doc_id.strip() for doc_id in document_context.split(',') if doc_id.strip()]
-                    for doc_id in doc_ids:
-                        doc_content = read_document_content(doc_id)
-                        if doc_content:
-                            context_text += f"\n\nDocument {doc_id}:\n{doc_content[:2000]}..."
-            elif isinstance(document_context, list):
-                for doc_id in document_context:
-                    doc_content = read_document_content(doc_id)
-                    if doc_content:
-                        context_text += f"\n\nDocument {doc_id}:\n{doc_content[:2000]}..."
+        # Build enhanced context from documents
+        context_text = build_enhanced_document_context(document_context, session_id)
         
-        system_prompt = f"""You are Avenai, an AI-powered API integration support specialist.
-
-Your role is to help developers integrate with APIs by:
-1. Answering technical questions clearly and concisely
-2. Providing code examples when helpful
-3. Explaining error messages and how to resolve them
-4. Guiding developers through integration steps
-5. Being professional but friendly, like a helpful support engineer
-
-**IMPORTANT**: Always format your responses using proper markdown:
-- Use **bold** for important terms and concepts
-- Use *italic* for emphasis
-- Use `code` for inline code, file names, and technical terms
-- Use ```language code blocks``` for multi-line code examples (e.g., ```javascript, ```python, ```json, ```bash)
-- Use headers (# Main Topic, ## Sub-topic) for organizing information
-- Use bullet points (- or *) for lists
-- Use numbered lists (1. 2. 3.) for step-by-step instructions
-- Add proper spacing between sections
-
-{context_text if context_text else "No specific documentation provided yet. Ask the user to upload API documentation for more specific help."}
-
-Remember: You're helping developers succeed with their API integrations. Be thorough but practical, and always use clear formatting."""
-
-        print("📝 Calling OpenAI API with NEW format...")
+        # Get conversation history for context
+        conversation_history = get_conversation_history(session_id) if session_id else []
         
-        # IMPORTANT: Use the NEW OpenAI API format
+        # Build enhanced system prompt
+        system_prompt = build_enhanced_system_prompt(context_text, conversation_history, model)
+        
+        # Prepare messages with conversation history
+        messages = [{"role": "system", "content": system_prompt}]
+        
+        # Add conversation history (last 10 messages to avoid token limits)
+        for msg in conversation_history[-10:]:
+            messages.append({"role": msg["role"], "content": msg["content"]})
+        
+        # Add current user message
+        messages.append({"role": "user", "content": user_message})
+        
+        # Get model configuration
+        model_config = AI_MODELS.get(model, AI_MODELS["gpt-4"])
+        
+        print(f"📝 Calling OpenAI API with {model} model...")
+        print(f"📊 Messages in context: {len(messages)}")
+        
+        # Call OpenAI API with enhanced configuration
         response = client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_message}
-            ],
-            max_tokens=1000,
-            temperature=0.7
+            model=model,
+            messages=messages,
+            max_tokens=model_config["max_tokens"],
+            temperature=model_config["temperature"],
+            presence_penalty=0.1,  # Encourage diverse responses
+            frequency_penalty=0.1   # Reduce repetition
         )
         
-        print("✅ OpenAI API call successful!")
-        return response.choices[0].message.content.strip()
+        ai_response = response.choices[0].message.content.strip()
+        
+        # Store conversation in memory
+        if session_id:
+            store_conversation_message(session_id, "user", user_message)
+            store_conversation_message(session_id, "assistant", ai_response)
+        
+        # Track response quality metrics
+        track_response_quality(session_id, model, len(messages), len(ai_response))
+        
+        print("✅ Enhanced OpenAI API call successful!")
+        return ai_response
         
     except Exception as e:
         print(f"❌ OpenAI API error: {e}")
         print(f"❌ Error type: {type(e)}")
         return get_intelligent_fallback_response(user_message, document_context)
+
+def build_enhanced_document_context(document_context: str, session_id: str = None) -> str:
+    """Build enhanced document context with better understanding"""
+    
+    if not document_context:
+        return "No specific documentation provided yet. Ask the user to upload API documentation for more specific help."
+    
+    context_parts = []
+    
+    try:
+        # Handle both string and list formats
+        if isinstance(document_context, str):
+            doc_ids = [doc_id.strip() for doc_id in document_context.split(',') if doc_id.strip()]
+        elif isinstance(document_context, list):
+            doc_ids = document_context
+        else:
+            return "Document context format not recognized."
+        
+        print(f"📚 Processing {len(doc_ids)} documents for context...")
+        
+        for doc_id in doc_ids:
+            doc_content = read_document_content(doc_id)
+            if doc_content:
+                # Enhanced document processing
+                doc_summary = create_document_summary(doc_content)
+                context_parts.append(f"""
+**Document {doc_id}:**
+{doc_summary}
+
+**Full Content Preview:**
+{doc_content[:1500]}...
+""")
+        
+        if context_parts:
+            return "\n".join(context_parts)
+        else:
+            return "Documents found but content could not be processed."
+            
+    except Exception as e:
+        print(f"⚠️  Error building document context: {e}")
+        return "Error processing document context. Please try again."
+
+def create_document_summary(content: str) -> str:
+    """Create a smart summary of document content"""
+    
+    # Simple but effective summary logic
+    lines = content.split('\n')
+    summary_lines = []
+    
+    # Look for key sections (headers, important keywords)
+    for line in lines[:20]:  # Check first 20 lines
+        line_lower = line.lower()
+        if any(keyword in line_lower for keyword in ['api', 'endpoint', 'method', 'parameter', 'response', 'example']):
+            summary_lines.append(line.strip())
+        elif line.strip().startswith('#') or line.strip().startswith('##'):
+            summary_lines.append(line.strip())
+    
+    # If no key sections found, take first few meaningful lines
+    if not summary_lines:
+        summary_lines = [line.strip() for line in lines[:5] if line.strip() and len(line.strip()) > 10]
+    
+    return "\n".join(summary_lines[:5])  # Limit to 5 lines
+
+def get_conversation_history(session_id: str) -> List[Dict]:
+    """Get conversation history for context"""
+    
+    if not session_id or session_id not in CONVERSATION_MEMORY:
+        return []
+    
+    return CONVERSATION_MEMORY[session_id]
+
+def store_conversation_message(session_id: str, role: str, content: str):
+    """Store a message in conversation memory"""
+    
+    if session_id not in CONVERSATION_MEMORY:
+        CONVERSATION_MEMORY[session_id] = []
+    
+    message = {
+        "role": role,
+        "content": content,
+        "timestamp": datetime.now().isoformat()
+    }
+    
+    CONVERSATION_MEMORY[session_id].append(message)
+    
+    # Keep only last MAX_MEMORY_LENGTH messages
+    if len(CONVERSATION_MEMORY[session_id]) > MAX_MEMORY_LENGTH:
+        CONVERSATION_MEMORY[session_id] = CONVERSATION_MEMORY[session_id][-MAX_MEMORY_LENGTH:]
+
+def build_enhanced_system_prompt(context_text: str, conversation_history: List[Dict], model: str) -> str:
+    """Build enhanced system prompt with conversation context"""
+    
+    model_info = AI_MODELS.get(model, AI_MODELS["gpt-4"])
+    
+    base_prompt = f"""You are Avenai, an AI-powered API integration support specialist using {model_info['name']}.
+
+Your role is to help developers integrate with APIs by:
+1. **Answering technical questions** clearly and concisely
+2. **Providing code examples** when helpful (always specify the language)
+3. **Explaining error messages** and how to resolve them
+4. **Guiding developers** through integration steps
+5. **Being professional but friendly**, like a helpful support engineer
+
+**IMPORTANT FORMATTING RULES:**
+- Use **bold** for important terms and concepts
+- Use *italic* for emphasis
+- Use `code` for inline code, file names, and technical terms
+- Use ```language code blocks``` for multi-line code examples
+- Use headers (# Main Topic, ## Sub-topic) for organizing information
+- Use bullet points (- or *) for lists
+- Use numbered lists (1. 2. 3.) for step-by-step instructions
+- Add proper spacing between sections
+
+**CONVERSATION CONTEXT:**
+{context_text}
+
+**CONVERSATION HISTORY:**
+{format_conversation_history(conversation_history)}
+
+**RESPONSE GUIDELINES:**
+- Be concise but thorough
+- If the user asks about a specific API, reference the relevant documentation
+- If you need more information, ask specific questions
+- Always provide actionable next steps
+- Use the conversation history to avoid repeating information
+
+Remember: You're helping developers succeed with their API integrations. Be thorough but practical, and always use clear formatting."""
+
+    return base_prompt
+
+def format_conversation_history(history: List[Dict]) -> str:
+    """Format conversation history for system prompt"""
+    
+    if not history:
+        return "This is a new conversation."
+    
+    formatted = []
+    for msg in history[-5:]:  # Last 5 messages to avoid token bloat
+        role_emoji = "👤" if msg["role"] == "user" else "🤖"
+        formatted.append(f"{role_emoji} {msg['role'].title()}: {msg['content'][:100]}...")
+    
+    return "\n".join(formatted)
+
+def track_response_quality(session_id: str, model: str, message_count: int, response_length: int):
+    """Track response quality metrics for analytics"""
+    
+    # This would integrate with your analytics system
+    print(f"📊 Quality Metrics - Session: {session_id}, Model: {model}, Messages: {message_count}, Response Length: {response_length}")
+    
+    # Store metrics for later analysis
+    if session_id not in MOCK_AI_METRICS:
+        MOCK_AI_METRICS[session_id] = []
+    
+    MOCK_AI_METRICS[session_id].append({
+        "timestamp": datetime.now().isoformat(),
+        "model": model,
+        "message_count": message_count,
+        "response_length": response_length,
+        "quality_score": calculate_quality_score(message_count, response_length)
+    })
+
+def calculate_quality_score(message_count: int, response_length: int) -> float:
+    """Calculate a simple quality score for the response"""
+    
+    # Simple scoring: longer responses with more context get higher scores
+    # In production, this would be more sophisticated
+    base_score = min(response_length / 100, 10)  # Max 10 points for length
+    context_bonus = min(message_count * 0.5, 5)  # Max 5 points for context
+    
+    return min(base_score + context_bonus, 10)  # Max score of 10
+
+# Initialize AI metrics storage
+MOCK_AI_METRICS = {}
 
 def get_intelligent_fallback_response(user_message: str, document_context: str = None) -> str:
     """Intelligent fallback when OpenAI is unavailable"""
@@ -1228,9 +1424,9 @@ async def send_chat_message(
     )
     MOCK_CHAT_MESSAGES[user_msg_id] = user_message.dict()
     
-    # Get AI response
+    # Get AI response with enhanced features
     start_time = time.time()
-    ai_response = get_ai_response(message, document_ids)
+    ai_response = get_ai_response(message, document_ids, session_id, "gpt-4")
     ai_response_time = time.time() - start_time
     
     # Create AI message
@@ -1255,7 +1451,8 @@ async def send_chat_message(
         session_id=session_id,
         message_count=2,  # User message + AI response
         document_count=document_count,
-        response_time=ai_response_time
+        response_time=ai_response_time,
+        model_used="gpt-4"
     )
     
     # Track user activity
@@ -1304,6 +1501,212 @@ async def delete_chat_session(session_id: str):
     del MOCK_CHAT_SESSIONS[session_id]
     
     return {"message": "Session deleted successfully"}
+
+# ============================================================================
+# ENHANCED AI FEATURES - PHASE 1
+# ============================================================================
+
+@app.get("/api/v1/ai/models")
+async def get_available_ai_models():
+    """Get available AI models for selection"""
+    return {
+        "models": AI_MODELS,
+        "default_model": "gpt-4",
+        "features": {
+            "context_memory": True,
+            "document_understanding": True,
+            "response_quality_tracking": True,
+            "multi_model_support": True
+        }
+    }
+
+@app.post("/api/v1/ai-chat/chat/enhanced")
+async def send_enhanced_chat_message(
+    request: Request,
+    message: str = Form(...),
+    session_id: str = Form(...),
+    document_ids: Optional[str] = Form(None),
+    model: str = Form("gpt-4"),
+    _: bool = Depends(rate_limit_dependency)
+):
+    """Send enhanced chat message with model selection and context memory"""
+    if session_id not in MOCK_CHAT_SESSIONS:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    # Validate model selection
+    if model not in AI_MODELS:
+        model = "gpt-4"  # Default to GPT-4 if invalid model
+    
+    # If no specific documents provided, use all available documents for the company
+    if not document_ids:
+        session = MOCK_CHAT_SESSIONS[session_id]
+        company_id = session.get("company_id", "company_001")
+        # Get all documents for this company
+        company_docs = [doc_id for doc_id, doc in MOCK_DOCUMENTS.items() if doc.get("company_id") == company_id]
+        if company_docs:
+            document_ids = ",".join(company_docs)
+            print(f"📚 Auto-including {len(company_docs)} documents for company {company_id}")
+    
+    # Sanitize inputs
+    sanitized_message = sanitize_input(message, 5000)
+    sanitized_session_id = sanitize_input(session_id, 100)
+    sanitized_document_ids = sanitize_input(document_ids, 500) if document_ids else None
+    
+    # Create user message
+    user_msg_id = create_id("msg")
+    user_message = ChatMessage(
+        id=user_msg_id,
+        session_id=sanitized_session_id,
+        content=sanitized_message,
+        role="user",
+        timestamp=datetime.now().isoformat(),
+        document_context=sanitized_document_ids
+    )
+    MOCK_CHAT_MESSAGES[user_msg_id] = user_message.dict()
+    
+    # Get enhanced AI response
+    start_time = time.time()
+    ai_response = get_ai_response(message, document_ids, session_id, model)
+    ai_response_time = time.time() - start_time
+    
+    # Create AI message
+    ai_msg_id = create_id("msg")
+    ai_message = ChatMessage(
+        id=ai_msg_id,
+        session_id=session_id,
+        content=ai_response,
+        role="assistant",
+        timestamp=datetime.now().isoformat(),
+        document_context=document_ids
+    )
+    MOCK_CHAT_MESSAGES[ai_msg_id] = ai_message.dict()
+    
+    # Update session
+    MOCK_CHAT_SESSIONS[session_id]["updated_at"] = datetime.now().isoformat()
+    
+    # Track enhanced AI usage
+    document_count = len(document_ids.split(',')) if document_ids else 0
+    track_ai_usage(
+        user_id="user_001",
+        session_id=session_id,
+        message_count=2,
+        document_count=document_count,
+        response_time=ai_response_time,
+        model_used=model
+    )
+    
+    return {
+        "message": ai_message,
+        "enhanced_features": {
+            "model_used": model,
+            "context_memory": True,
+            "document_understanding": True,
+            "response_quality": MOCK_AI_METRICS.get(session_id, [{}])[-1].get("quality_score", 0) if session_id in MOCK_AI_METRICS else 0
+        }
+    }
+
+@app.get("/api/v1/ai-chat/sessions/{session_id}/context")
+async def get_chat_context(session_id: str):
+    """Get conversation context and memory for a session"""
+    if session_id not in MOCK_CHAT_SESSIONS:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    # Get conversation history
+    conversation_history = get_conversation_history(session_id)
+    
+    # Get session info
+    session = MOCK_CHAT_SESSIONS[session_id]
+    
+    # Get document context
+    document_context = []
+    if session.get("document_ids"):
+        doc_ids = session["document_ids"].split(",") if isinstance(session["document_ids"], str) else session["document_ids"]
+        for doc_id in doc_ids:
+            if doc_id in MOCK_DOCUMENTS:
+                doc = MOCK_DOCUMENTS[doc_id]
+                document_context.append({
+                    "id": doc_id,
+                    "name": doc.get("original_filename", "Unknown"),
+                    "summary": create_document_summary(doc.get("content", ""))[:200] + "..."
+                })
+    
+    return {
+        "session_id": session_id,
+        "conversation_history": conversation_history,
+        "document_context": document_context,
+        "memory_length": len(conversation_history),
+        "max_memory": MAX_MEMORY_LENGTH
+    }
+
+@app.get("/api/v1/ai/metrics/{session_id}")
+async def get_ai_metrics(session_id: str):
+    """Get AI response quality metrics for a session"""
+    if session_id not in MOCK_AI_METRICS:
+        raise HTTPException(status_code=404, detail="No metrics found for session")
+    
+    metrics = MOCK_AI_METRICS[session_id]
+    
+    # Calculate summary statistics
+    if metrics:
+        avg_quality = sum(m["quality_score"] for m in metrics) / len(metrics)
+        avg_response_length = sum(m["response_length"] for m in metrics) / len(metrics)
+        models_used = list(set(m["model"] for m in metrics))
+        
+        return {
+            "session_id": session_id,
+            "total_responses": len(metrics),
+            "average_quality_score": round(avg_quality, 2),
+            "average_response_length": round(avg_response_length, 0),
+            "models_used": models_used,
+            "recent_metrics": metrics[-10:],  # Last 10 responses
+            "quality_trend": [m["quality_score"] for m in metrics[-20:]]  # Last 20 quality scores
+        }
+    
+    return {"session_id": session_id, "message": "No metrics available"}
+
+@app.get("/api/v1/ai/analytics")
+async def get_ai_analytics():
+    """Get overall AI performance analytics"""
+    
+    # Aggregate metrics across all sessions
+    all_metrics = []
+    for session_metrics in MOCK_AI_METRICS.values():
+        all_metrics.extend(session_metrics)
+    
+    if not all_metrics:
+        return {"message": "No AI metrics available yet"}
+    
+    # Calculate overall statistics
+    total_responses = len(all_metrics)
+    avg_quality = sum(m["quality_score"] for m in all_metrics) / total_responses
+    avg_response_length = sum(m["response_length"] for m in all_metrics) / total_responses
+    
+    # Model usage statistics
+    model_usage = {}
+    for metric in all_metrics:
+        model = metric["model"]
+        model_usage[model] = model_usage.get(model, 0) + 1
+    
+    # Quality distribution
+    quality_distribution = {
+        "excellent": len([m for m in all_metrics if m["quality_score"] >= 8]),
+        "good": len([m for m in all_metrics if 6 <= m["quality_score"] < 8]),
+        "average": len([m for m in all_metrics if 4 <= m["quality_score"] < 6]),
+        "poor": len([m for m in all_metrics if m["quality_score"] < 4])
+    }
+    
+    return {
+        "total_responses": total_responses,
+        "average_quality_score": round(avg_quality, 2),
+        "average_response_length": round(avg_response_length, 0),
+        "model_usage": model_usage,
+        "quality_distribution": quality_distribution,
+        "performance_trend": {
+            "last_24h": len([m for m in all_metrics if datetime.fromisoformat(m["timestamp"]) > datetime.now() - timedelta(days=1)]),
+            "last_7d": len([m for m in all_metrics if datetime.fromisoformat(m["timestamp"]) > datetime.now() - timedelta(days=7)]),
+            "last_30d": len([m for m in all_metrics if datetime.fromisoformat(m["timestamp"]) > datetime.now() - timedelta(days=30)])
+        }
+    }
 
 @app.get("/api/v1/analytics/dashboard")
 async def get_dashboard_stats():
