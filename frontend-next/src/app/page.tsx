@@ -259,3 +259,4 @@ export default function HomePage() {
     </div>
   )
 }
+// Force Vercel deployment after restoring working frontend
