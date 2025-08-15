@@ -18,5 +18,5 @@ python-dotenv>=1.0.0
 pydantic>=2.0.0
 pydantic-settings>=2.0.0
 
-# Additional Dependencies
-python-multipart>=0.0.6
+# Force uvicorn installation
+uvicorn[standard]
