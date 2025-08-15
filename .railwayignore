@@ -1,0 +1,21 @@
+# Don't ignore these important files
+!build.sh
+!requirements.txt
+!avenai_final.py
+!railway.toml
+!nixpacks.toml
+
+# Ignore development files
+frontend-next/
+*.md
+.git/
+__pycache__/
+uploads/
+config/
+core/
+database/
+k8s/
+monitoring/
+nginx/
+scripts/
+.github/
