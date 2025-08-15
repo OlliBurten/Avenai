@@ -9,10 +9,18 @@ import subprocess
 import sys
 
 def main():
-    print("🚀 Starting Avenai AI Platform...")
+    print("🚀 Starting Avenai AI Platform via start.py...")
     print(f"Current directory: {os.getcwd()}")
     print(f"Python version: {sys.version}")
     print(f"Port: {os.environ.get('PORT', '8000')}")
+    
+    # List files in current directory
+    print("Files in current directory:")
+    try:
+        for file in os.listdir('.'):
+            print(f"  {file}")
+    except Exception as e:
+        print(f"Error listing files: {e}")
     
     # Get the port from environment variable
     port = os.environ.get('PORT', '8000')
@@ -22,8 +30,7 @@ def main():
         sys.executable, "-m", "uvicorn",
         "avenai_final:app",
         "--host", "0.0.0.0",
-        "--port", port,
-        "--workers", "1"
+        "--port", port
     ]
     
     print(f"Starting command: {' '.join(cmd)}")

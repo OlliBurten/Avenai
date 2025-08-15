@@ -14,8 +14,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Make start script executable
-RUN chmod +x start.sh
+# Make start script executable and verify it exists
+RUN chmod +x start.sh && \
+    ls -la start.sh && \
+    echo "Files in /app:" && \
+    ls -la
 
 # Expose port
 EXPOSE 8000
