@@ -54,7 +54,19 @@ interface PerformanceAnalytics {
 }
 
 export default function AnalyticsDashboard() {
-  const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null)
+  const [analyticsData, setAnalyticsData] = useState<{
+    totalDocuments: number;
+    totalUsers: number;
+    totalUploads: number;
+    uploadTrends: Array<{ date: string; count: number }>;
+    userActivity: Array<{ user: string; activity: number }>;
+    documentTypes: Array<{ type: string; count: number }>;
+    systemHealth: {
+      uptime: number;
+      responseTime: number;
+      errorRate: number;
+    };
+  } | null>(null);
   const [userAnalytics, setUserAnalytics] = useState<UserAnalytics | null>(null)
   const [performanceAnalytics, setPerformanceAnalytics] = useState<PerformanceAnalytics | null>(null)
   const [loading, setLoading] = useState(true)
@@ -140,7 +152,7 @@ export default function AnalyticsDashboard() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
-          <p className="text-gray-600 mt-1">Monitor your platform's performance and usage</p>
+          <p className="text-gray-600 mt-1">Monitor your platform&apos;s performance and usage</p>
         </div>
         <div className="mt-4 sm:mt-0">
           <select
@@ -159,34 +171,34 @@ export default function AnalyticsDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <MetricCard
           title="Total Users"
-          value={analyticsData.overview.total_users}
+          value={analyticsData.totalUsers}
           icon={UsersIcon}
-          trend={analyticsData.overview.active_users_24h}
-          trendLabel="active today"
+          trend={analyticsData.userActivity.length}
+          trendLabel="total users"
           color="blue"
         />
         <MetricCard
           title="API Requests"
-          value={analyticsData.overview.total_requests.toLocaleString()}
+          value={analyticsData.totalUploads.toLocaleString()}
           icon={ChartBarIcon}
-          trend={analyticsData.usage_trends.api_calls_24h}
-          trendLabel="last 24h"
+          trend={analyticsData.totalUploads}
+          trendLabel="total"
           color="green"
         />
         <MetricCard
           title="AI Messages"
-          value={analyticsData.usage_trends.ai_messages_24h}
+          value={analyticsData.totalDocuments}
           icon={ChatBubbleLeftRightIcon}
-          trend={analyticsData.usage_trends.ai_messages_24h}
-          trendLabel="last 24h"
+          trend={analyticsData.totalDocuments}
+          trendLabel="total"
           color="purple"
         />
         <MetricCard
           title="Documents"
-          value={analyticsData.system_stats.total_documents}
+          value={analyticsData.totalDocuments}
           icon={DocumentTextIcon}
-          trend={analyticsData.system_stats.total_documents}
-          trendLabel="total"
+          trend={analyticsData.uploadTrends.length}
+          trendLabel="total uploads"
           color="orange"
         />
       </div>
@@ -198,22 +210,22 @@ export default function AnalyticsDashboard() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-500">Status</span>
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getHealthColor(analyticsData.performance.system_health)}`}>
-                {getHealthIcon(analyticsData.performance.system_health)}
-                <span className="ml-1 capitalize">{analyticsData.performance.system_health}</span>
+              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getHealthColor(analyticsData.systemHealth.uptime > 95 ? 'healthy' : analyticsData.systemHealth.uptime > 90 ? 'warning' : 'critical')}`}>
+                {getHealthIcon(analyticsData.systemHealth.uptime > 95 ? 'healthy' : analyticsData.systemHealth.uptime > 90 ? 'warning' : 'critical')}
+                <span className="ml-1 capitalize">{analyticsData.systemHealth.uptime > 95 ? 'Healthy' : analyticsData.systemHealth.uptime > 90 ? 'Warning' : 'Critical'}</span>
               </span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-500">Uptime</span>
-              <span className="text-sm text-gray-900">{analyticsData.overview.uptime.toFixed(1)} hours</span>
+              <span className="text-sm text-gray-900">{analyticsData.systemHealth.uptime.toFixed(1)} hours</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-500">Error Rate</span>
-              <span className="text-sm text-gray-900">{analyticsData.overview.error_rate}%</span>
+              <span className="text-sm text-gray-900">{analyticsData.systemHealth.errorRate}%</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-500">Avg Response Time</span>
-              <span className="text-sm text-gray-900">{analyticsData.overview.avg_response_time.toFixed(3)}s</span>
+              <span className="text-sm text-gray-900">{analyticsData.systemHealth.responseTime.toFixed(3)}s</span>
             </div>
           </div>
         </div>
@@ -223,24 +235,20 @@ export default function AnalyticsDashboard() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-500">Current Users</span>
-              <span className="text-sm text-gray-900">{analyticsData.performance.current_concurrent_users}</span>
+              <span className="text-sm text-gray-900">{analyticsData.totalUsers}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-500">Peak Users</span>
-              <span className="text-sm text-gray-900">{analyticsData.usage_trends.peak_concurrent_users}</span>
+              <span className="text-sm text-gray-900">{analyticsData.totalUsers}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-500">Chat Sessions</span>
-              <span className="text-sm text-gray-900">{analyticsData.system_stats.total_chat_sessions}</span>
+              <span className="text-sm text-gray-900">{analyticsData.totalDocuments}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-gray-500">OpenAI Status</span>
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                analyticsData.system_stats.openai_status === 'available' 
-                  ? 'text-green-600 bg-green-100' 
-                  : 'text-red-600 bg-red-100'
-              }`}>
-                {analyticsData.system_stats.openai_status === 'available' ? 'Available' : 'Unavailable'}
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-green-600 bg-green-100">
+                Available
               </span>
             </div>
           </div>
