@@ -2,6 +2,10 @@
 set -e
 
 echo "🔨 Starting build process..."
+echo "Current directory: $(pwd)"
+echo "Files in current directory:"
+ls -la
+
 echo "Python version: $(python3 --version)"
 echo "Pip version: $(python3 -m pip --version)"
 
@@ -11,5 +15,8 @@ python3 -m pip install --no-cache-dir -r requirements.txt
 
 echo "✅ Verifying uvicorn installation..."
 python3 -m uvicorn --version
+
+echo "🔍 Checking installed packages..."
+python3 -m pip list | grep -i uvicorn
 
 echo "🚀 Build completed successfully!"
