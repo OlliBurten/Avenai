@@ -257,4 +257,5 @@ export default function HomePage() {
         </div>
       )}
     </div>
-// Force Vercel deployment with latest commit containing API client files
+  )
+}
