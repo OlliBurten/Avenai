@@ -11,6 +11,7 @@ import {
   ChatBubbleLeftRightIcon,
   UsersIcon,
   Cog6ToothIcon,
+  CogIcon,
   ArrowRightOnRectangleIcon,
   BellIcon,
   ShieldExclamationIcon
@@ -56,6 +57,7 @@ export default function EnhancedNavigation() {
     { name: 'Collaboration', href: '/collaboration', icon: UsersIcon, badge: 'PHASE 2' },
     { name: 'Advanced Collaboration', href: '/advanced-collaboration', icon: DocumentTextIcon, badge: 'PHASE 3' },
     { name: 'Enterprise', href: '/enterprise', icon: ShieldExclamationIcon, badge: 'PHASE 4' },
+    { name: 'AI Dashboard', href: '/ai-dashboard', icon: CogIcon, badge: 'PHASE 5' },
     { name: 'Admin', href: '/admin', icon: ShieldExclamationIcon },
     { name: 'Compliance', href: '/compliance', icon: DocumentTextIcon },
     { name: 'Webhooks', href: '/webhooks', icon: BellIcon },
