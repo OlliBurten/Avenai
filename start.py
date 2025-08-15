@@ -22,6 +22,16 @@ def main():
     except Exception as e:
         print(f"Error listing files: {e}")
     
+    # Check if avenai_final.py exists
+    if os.path.exists('avenai_final.py'):
+        print("✅ avenai_final.py found!")
+    else:
+        print("❌ avenai_final.py NOT found!")
+        print("Available Python files:")
+        for file in os.listdir('.'):
+            if file.endswith('.py'):
+                print(f"  {file}")
+    
     # Get the port from environment variable
     port = os.environ.get('PORT', '8000')
     
