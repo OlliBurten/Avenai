@@ -13,7 +13,7 @@ from datetime import datetime
 from typing import List, Optional, Dict, Any
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Request, Depends
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Request, Depends, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse
@@ -23,6 +23,7 @@ from datetime import datetime, timedelta
 import time
 from collections import defaultdict
 import uuid
+import asyncio
 
 # Load environment variables from config.env with higher priority
 from dotenv import load_dotenv
@@ -775,6 +776,109 @@ def calculate_quality_score(message_count: int, response_length: int) -> float:
 
 # Initialize AI metrics storage
 MOCK_AI_METRICS = {}
+
+# ============================================================================
+# REAL-TIME COLLABORATION - PHASE 2
+# ============================================================================
+
+class ConnectionManager:
+    """Manages WebSocket connections for real-time collaboration"""
+    
+    def __init__(self):
+        self.active_connections: Dict[str, List[WebSocket]] = defaultdict(list)
+        self.user_sessions: Dict[str, str] = {}  # user_id -> session_id
+        self.session_users: Dict[str, List[str]] = defaultdict(list)  # session_id -> [user_ids]
+    
+    async def connect(self, websocket: WebSocket, user_id: str, session_id: str):
+        """Connect a user to a collaboration session"""
+        await websocket.accept()
+        
+        # Store connection
+        self.active_connections[session_id].append(websocket)
+        self.user_sessions[user_id] = session_id
+        self.session_users[session_id].append(user_id)
+        
+        # Notify other users in session
+        await self.broadcast_to_session(
+            session_id,
+            {
+                "type": "user_joined",
+                "user_id": user_id,
+                "timestamp": datetime.now().isoformat(),
+                "message": f"User {user_id} joined the session"
+            },
+            exclude_websocket=websocket
+        )
+        
+        print(f"🔌 User {user_id} connected to session {session_id}")
+        print(f"📊 Active connections: {len(self.active_connections[session_id])}")
+    
+    def disconnect(self, websocket: WebSocket, user_id: str):
+        """Disconnect a user from a collaboration session"""
+        session_id = self.user_sessions.get(user_id)
+        if session_id:
+            # Remove from active connections
+            if websocket in self.active_connections[session_id]:
+                self.active_connections[session_id].remove(websocket)
+            
+            # Remove from session users
+            if user_id in self.session_users[session_id]:
+                self.session_users[session_id].remove(user_id)
+            
+            # Clean up empty sessions
+            if not self.active_connections[session_id]:
+                del self.active_connections[session_id]
+                del self.session_users[session_id]
+            
+            # Clean up user session
+            if user_id in self.user_sessions:
+                del self.user_sessions[user_id]
+            
+            print(f"🔌 User {user_id} disconnected from session {session_id}")
+    
+    async def broadcast_to_session(self, session_id: str, message: Dict, exclude_websocket: WebSocket = None):
+        """Broadcast message to all users in a session"""
+        if session_id not in self.active_connections:
+            return
+        
+        disconnected_websockets = []
+        
+        for websocket in self.active_connections[session_id]:
+            if websocket != exclude_websocket:
+                try:
+                    await websocket.send_text(json.dumps(message))
+                except Exception as e:
+                    print(f"❌ Error sending message to websocket: {e}")
+                    disconnected_websockets.append(websocket)
+        
+        # Clean up disconnected websockets
+        for websocket in disconnected_websockets:
+            self.active_connections[session_id].remove(websocket)
+    
+    async def send_personal_message(self, message: Dict, websocket: WebSocket):
+        """Send message to a specific websocket"""
+        try:
+            await websocket.send_text(json.dumps(message))
+        except Exception as e:
+            print(f"❌ Error sending personal message: {e}")
+    
+    def get_session_info(self, session_id: str) -> Dict:
+        """Get information about a collaboration session"""
+        if session_id not in self.active_connections:
+            return {"active_users": 0, "users": []}
+        
+        return {
+            "active_users": len(self.active_connections[session_id]),
+            "users": self.session_users[session_id]
+        }
+
+# Initialize connection manager
+connection_manager = ConnectionManager()
+
+# Real-time collaboration data storage
+COLLABORATION_SESSIONS = {}  # session_id -> session_data
+COLLABORATION_DOCUMENTS = {}  # document_id -> collaboration_data
+REAL_TIME_CHAT = {}  # session_id -> chat_messages
 
 def get_intelligent_fallback_response(user_message: str, document_context: str = None) -> str:
     """Intelligent fallback when OpenAI is unavailable"""
@@ -1706,6 +1810,270 @@ async def get_ai_analytics():
             "last_7d": len([m for m in all_metrics if datetime.fromisoformat(m["timestamp"]) > datetime.now() - timedelta(days=7)]),
             "last_30d": len([m for m in all_metrics if datetime.fromisoformat(m["timestamp"]) > datetime.now() - timedelta(days=30)])
         }
+    }
+
+# ============================================================================
+# REAL-TIME COLLABORATION ENDPOINTS - PHASE 2
+# ============================================================================
+
+@app.websocket("/ws/collaboration/{session_id}")
+async def websocket_collaboration_endpoint(websocket: WebSocket, session_id: str):
+    """WebSocket endpoint for real-time collaboration"""
+    
+    # For now, use a mock user ID (in production, this would come from authentication)
+    user_id = f"user_{uuid.uuid4().hex[:8]}"
+    
+    try:
+        # Connect to the collaboration session
+        await connection_manager.connect(websocket, user_id, session_id)
+        
+        # Send session info to the newly connected user
+        session_info = connection_manager.get_session_info(session_id)
+        await connection_manager.send_personal_message({
+            "type": "session_info",
+            "session_id": session_id,
+            "user_id": user_id,
+            "active_users": session_info["active_users"],
+            "users": session_info["users"],
+            "timestamp": datetime.now().isoformat()
+        }, websocket)
+        
+        # Send existing chat messages
+        if session_id in REAL_TIME_CHAT:
+            for message in REAL_TIME_CHAT[session_id][-50:]:  # Last 50 messages
+                await connection_manager.send_personal_message(message, websocket)
+        
+        # Handle incoming messages
+        while True:
+            try:
+                # Receive message from client
+                data = await websocket.receive_text()
+                message_data = json.loads(data)
+                
+                # Process different message types
+                await process_collaboration_message(session_id, user_id, message_data, websocket)
+                
+            except WebSocketDisconnect:
+                break
+            except Exception as e:
+                print(f"❌ Error processing websocket message: {e}")
+                await connection_manager.send_personal_message({
+                    "type": "error",
+                    "message": "Error processing message",
+                    "timestamp": datetime.now().isoformat()
+                }, websocket)
+    
+    except WebSocketDisconnect:
+        print(f"🔌 WebSocket disconnected for user {user_id}")
+    except Exception as e:
+        print(f"❌ WebSocket error: {e}")
+    finally:
+        # Clean up connection
+        connection_manager.disconnect(websocket, user_id)
+
+async def process_collaboration_message(session_id: str, user_id: str, message_data: Dict, websocket: WebSocket):
+    """Process incoming collaboration messages"""
+    
+    message_type = message_data.get("type")
+    
+    if message_type == "chat_message":
+        # Handle real-time chat message
+        chat_message = {
+            "type": "chat_message",
+            "user_id": user_id,
+            "message": message_data.get("message", ""),
+            "timestamp": datetime.now().isoformat(),
+            "session_id": session_id
+        }
+        
+        # Store in real-time chat
+        if session_id not in REAL_TIME_CHAT:
+            REAL_TIME_CHAT[session_id] = []
+        REAL_TIME_CHAT[session_id].append(chat_message)
+        
+        # Keep only last 100 messages
+        if len(REAL_TIME_CHAT[session_id]) > 100:
+            REAL_TIME_CHAT[session_id] = REAL_TIME_CHAT[session_id][-100:]
+        
+        # Broadcast to all users in session
+        await connection_manager.broadcast_to_session(session_id, chat_message)
+        
+        print(f"💬 Chat message from {user_id} in session {session_id}")
+    
+    elif message_type == "document_edit":
+        # Handle collaborative document editing
+        edit_data = {
+            "type": "document_edit",
+            "user_id": user_id,
+            "document_id": message_data.get("document_id"),
+            "changes": message_data.get("changes", {}),
+            "timestamp": datetime.now().isoformat(),
+            "session_id": session_id
+        }
+        
+        # Store document changes
+        doc_id = message_data.get("document_id")
+        if doc_id not in COLLABORATION_DOCUMENTS:
+            COLLABORATION_DOCUMENTS[doc_id] = []
+        COLLABORATION_DOCUMENTS[doc_id].append(edit_data)
+        
+        # Broadcast to all users in session
+        await connection_manager.broadcast_to_session(session_id, edit_data)
+        
+        print(f"📝 Document edit from {user_id} in session {session_id}")
+    
+    elif message_type == "cursor_move":
+        # Handle cursor position updates for collaborative editing
+        cursor_data = {
+            "type": "cursor_move",
+            "user_id": user_id,
+            "position": message_data.get("position", {}),
+            "timestamp": datetime.now().isoformat(),
+            "session_id": session_id
+        }
+        
+        # Broadcast to other users (exclude sender)
+        await connection_manager.broadcast_to_session(session_id, cursor_data, exclude_websocket=websocket)
+    
+    elif message_type == "typing_indicator":
+        # Handle typing indicators
+        typing_data = {
+            "type": "typing_indicator",
+            "user_id": user_id,
+            "is_typing": message_data.get("is_typing", False),
+            "timestamp": datetime.now().isoformat(),
+            "session_id": session_id
+        }
+        
+        # Broadcast to other users (exclude sender)
+        await connection_manager.broadcast_to_session(session_id, typing_data, exclude_websocket=websocket)
+    
+    else:
+        print(f"⚠️  Unknown message type: {message_type}")
+
+@app.post("/api/v1/collaboration/sessions")
+async def create_collaboration_session(
+    request: Request,
+    title: str = Form(...),
+    company_id: str = Form(...),
+    created_by: str = Form(...),
+    document_ids: Optional[str] = Form(None),
+    session_type: str = Form("document_editing"),  # document_editing, ai_chat, general
+    _: bool = Depends(rate_limit_dependency)
+):
+    """Create a new collaboration session"""
+    
+    session_id = f"collab_{uuid.uuid4().hex[:12]}"
+    
+    # Sanitize inputs
+    sanitized_title = sanitize_input(title, 200)
+    sanitized_company_id = sanitize_input(company_id, 100)
+    sanitized_created_by = sanitize_input(created_by, 100)
+    
+    # Create collaboration session
+    session_data = {
+        "id": session_id,
+        "title": sanitized_title,
+        "company_id": sanitized_company_id,
+        "created_by": sanitized_created_by,
+        "session_type": session_type,
+        "document_ids": document_ids.split(",") if document_ids else [],
+        "created_at": datetime.now().isoformat(),
+        "updated_at": datetime.now().isoformat(),
+        "active_users": 0,
+        "status": "active"
+    }
+    
+    COLLABORATION_SESSIONS[session_id] = session_data
+    
+    print(f"🚀 Created collaboration session: {session_id}")
+    
+    return {
+        "session_id": session_id,
+        "session": session_data,
+        "websocket_url": f"ws://{request.base_url.hostname}:{request.base_url.port}/ws/collaboration/{session_id}"
+    }
+
+@app.get("/api/v1/collaboration/sessions")
+async def get_collaboration_sessions(company_id: Optional[str] = None):
+    """Get collaboration sessions"""
+    
+    sessions = list(COLLABORATION_SESSIONS.values())
+    
+    if company_id:
+        sessions = [s for s in sessions if s["company_id"] == company_id]
+    
+    # Add real-time connection info
+    for session in sessions:
+        session_id = session["id"]
+        session_info = connection_manager.get_session_info(session_id)
+        session["active_users"] = session_info["active_users"]
+        session["connected_users"] = session_info["users"]
+    
+    return sessions
+
+@app.get("/api/v1/collaboration/sessions/{session_id}")
+async def get_collaboration_session(session_id: str):
+    """Get specific collaboration session details"""
+    
+    if session_id not in COLLABORATION_SESSIONS:
+        raise HTTPException(status_code=404, detail="Collaboration session not found")
+    
+    session = COLLABORATION_SESSIONS[session_id]
+    session_info = connection_manager.get_session_info(session_id)
+    
+    # Add real-time info
+    session["active_users"] = session_info["active_users"]
+    session["connected_users"] = session_info["users"]
+    
+    # Add recent chat messages
+    if session_id in REAL_TIME_CHAT:
+        session["recent_chat"] = REAL_TIME_CHAT[session_id][-20:]  # Last 20 messages
+    
+    return session
+
+@app.get("/api/v1/collaboration/sessions/{session_id}/chat")
+async def get_session_chat_history(session_id: str, limit: int = 100):
+    """Get chat history for a collaboration session"""
+    
+    if session_id not in COLLABORATION_SESSIONS:
+        raise HTTPException(status_code=404, detail="Collaboration session not found")
+    
+    if session_id not in REAL_TIME_CHAT:
+        return {"messages": [], "total": 0}
+    
+    messages = REAL_TIME_CHAT[session_id][-limit:]
+    
+    return {
+        "messages": messages,
+        "total": len(REAL_TIME_CHAT[session_id]),
+        "session_id": session_id
+    }
+
+@app.post("/api/v1/collaboration/sessions/{session_id}/join")
+async def join_collaboration_session(
+    session_id: str,
+    user_id: str = Form(...),
+    user_name: str = Form(...)
+):
+    """Join a collaboration session"""
+    
+    if session_id not in COLLABORATION_SESSIONS:
+        raise HTTPException(status_code=404, detail="Collaboration session not found")
+    
+    # Update session info
+    COLLABORATION_SESSIONS[session_id]["updated_at"] = datetime.now().isoformat()
+    
+    # Get current session info
+    session_info = connection_manager.get_session_info(session_id)
+    
+    return {
+        "session_id": session_id,
+        "user_id": user_id,
+        "user_name": user_name,
+        "active_users": session_info["active_users"],
+        "connected_users": session_info["users"],
+        "websocket_url": f"ws://localhost:8000/ws/collaboration/{session_id}"
     }
 
 @app.get("/api/v1/analytics/dashboard")
