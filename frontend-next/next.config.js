@@ -6,6 +6,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Enable standalone output for Docker
+  output: 'standalone',
   
   // Image optimization
   images: {
