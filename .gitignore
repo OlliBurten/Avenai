@@ -68,3 +68,6 @@ railway.json
 
 # Vercel
 .vercel/
+
+# GitHub
+.github/workflows/
