@@ -1,0 +1,51 @@
+Avenai Identity API – Quickstart (Demo)  v1.0
+Brand: Avenai
+Environment: DEMO ONLY (fictional)
+Last updated: 2025-08-10
+
+Overview
+Avenai Identity API lets your app start and track end‑user identity verification sessions.
+This is a DEMO document for sales demos. It contains realistic but fictitious endpoints.
+
+Environments
+TEST: https://demo.avenai.dev/api/v1
+PROD: https://demo.avenai.app/api/v1  (for demo visuals only; not live)
+
+Authentication
+All requests must include:
+  Authorization: Bearer <api_key>
+  X-Avenai-Product: identity
+  Content-Type: application/json
+
+Create session
+POST /sessions
+Request:
+{
+  "customer_ref": "order-12345",
+  "locale": "en",
+  "features": ["doc_read", "liveness"]
+}
+Response:
+{
+  "id": "sess_demo_9A2Xbq",
+  "expires_in": 900
+}
+
+Get session status
+GET /sessions/{sessionId}
+
+Common errors
+401 invalid_api_key – Check Authorization header
+403 subscription_inactive – Contact Avenai support
+422 invalid_payload – Inspect 'errors' array
+
+Webhooks
+We recommend handling a webhook at POST /webhooks/identity to receive terminal states:
+  verified, rejected, timeout.
+
+Rate limits
+100 requests/min per API key. 429 returned when exceeded.
+
+Best practices
+- Pass a stable customer_ref for idempotency
+- Log session IDs in your app for traceability

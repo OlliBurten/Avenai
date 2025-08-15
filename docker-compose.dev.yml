@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database - Development
+  postgres:
+    image: postgres:15-alpine
+    container_name: avenai_postgres_dev
+    environment:
+      POSTGRES_DB: avenai_dev
+      POSTGRES_USER: avenai_user
+      POSTGRES_PASSWORD: avenai_dev_password
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - avenai_dev_network
+    restart: unless-stopped
+
+  # Redis for development
+  redis:
+    image: redis:7-alpine
+    container_name: avenai_redis_dev
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_dev_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - avenai_dev_network
+    restart: unless-stopped
+
+  # Backend API - Development with hot reload
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: avenai_backend_dev
+    environment:
+      - DATABASE_URL=postgresql://avenai_user:avenai_dev_password@postgres:5432/avenai_dev
+      - REDIS_URL=redis://redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DEBUG=True
+      - HOST=0.0.0.0
+      - PORT=8000
+      - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001
+      - UPLOAD_DIR=/app/uploads
+      - LOG_LEVEL=DEBUG
+    volumes:
+      - ./backend:/app
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    ports:
+      - "8000:8000"
+    networks:
+      - avenai_dev_network
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+    command: uvicorn avenai_final:app --host 0.0.0.0 --port 8000 --reload
+
+  # Frontend Next.js - Development with hot reload
+  frontend:
+    build:
+      context: ./frontend-next
+      dockerfile: Dockerfile.dev
+    container_name: avenai_frontend_dev
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NODE_ENV=development
+    volumes:
+      - ./frontend-next:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "3000:3000"
+    networks:
+      - avenai_dev_network
+    depends_on:
+      - backend
+    restart: unless-stopped
+    command: npm run dev
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+
+networks:
+  avenai_dev_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16

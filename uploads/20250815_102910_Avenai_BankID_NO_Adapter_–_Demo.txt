@@ -1,0 +1,54 @@
+Avenai BankID (Norway) Adapter Guide – Demo  v1.0
+Brand: Avenai
+Environment: DEMO ONLY (fictional)
+Last updated: 2025-08-10
+
+Purpose
+This guide describes how to authenticate users via BankID Norway using Avenai’s adapter.
+All details are fictitious but API shapes mirror typical OIDC + session flows.
+
+Base URLs
+TEST: https://demo.avenai.dev/api/v1/bankidno
+PROD: https://demo.avenai.app/api/v1/bankidno  (demo visuals, not live)
+
+Start authentication
+POST /bankidno/auth
+Headers:
+  Authorization: Bearer <api_key>
+  Content-Type: application/json
+Body:
+{
+  "login_hint": "nnin",
+  "redirect_uri": "https://merchant.example.com/callback",
+  "scopes": ["openid","profile"]
+}
+Response:
+{
+  "session_id": "bid_demo_Nb47p",
+  "redirect": "https://bankid.demo/authorize?..."
+}
+
+Onboard – request NNIN consent
+POST /bankidno/auth/register
+Body:
+{ "redirect_uri": "...", "scopes": ["openid","profile","nnin"] }
+
+Get session details
+GET /bankidno/auth/{sessionId}
+
+Required headers (adapter REST)
+Authorization: Bearer <subscription_key>
+Content-Type: application/json
+
+Testing (demo users)
+- Aksel Demo – 06046512345 / otp / demo1234
+- Sanna Demo – 12829012345 / otp / demo1234
+
+Errors
+access_denied – user cancelled
+temporarily_unavailable – retry after 30s
+invalid_scope – remove unsupported scopes
+
+UX tips
+- Prefer app-to-app flow on mobile
+- Keep merchant logo 300x60 PNG/SVG under 10kB

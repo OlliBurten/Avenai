@@ -1,0 +1,8 @@
+Avenai Identity API - Quickstart Guide
+
+This API allows you to authenticate users and manage identities.
+
+Endpoints:
+- POST /auth/login - User login
+- GET /auth/me - Get user info
+- POST /auth/logout - User logout
