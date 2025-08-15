@@ -55,6 +55,7 @@ export default function EnhancedNavigation() {
     { name: 'Enhanced AI Chat', href: '/enhanced-ai-chat', icon: ChatBubbleLeftRightIcon, badge: 'NEW' },
     { name: 'Collaboration', href: '/collaboration', icon: UsersIcon, badge: 'PHASE 2' },
     { name: 'Advanced Collaboration', href: '/advanced-collaboration', icon: DocumentTextIcon, badge: 'PHASE 3' },
+    { name: 'Enterprise', href: '/enterprise', icon: ShieldExclamationIcon, badge: 'PHASE 4' },
     { name: 'Admin', href: '/admin', icon: ShieldExclamationIcon },
     { name: 'Compliance', href: '/compliance', icon: DocumentTextIcon },
     { name: 'Webhooks', href: '/webhooks', icon: BellIcon },
