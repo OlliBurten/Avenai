@@ -1,5 +1,8 @@
 #!/bin/bash
-echo "Starting Avenai AI Platform..."
+# Railway start script for Avenai AI Platform
+echo "🚀 Starting Avenai AI Platform via start.sh..."
+echo "Current directory: $(pwd)"
+echo "Python version: $(python3 --version)"
 echo "Port: $PORT"
 echo "Starting uvicorn..."
 
