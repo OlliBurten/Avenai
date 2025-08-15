@@ -1,8 +1,8 @@
 [phases.setup]
-nixPkgs = ["python3", "python3Packages.pip", "python3Packages.virtualenv", "bash"]
+nixPkgs = ["python3", "python3Packages.pip", "python3Packages.virtualenv"]
 
 [phases.install]
 cmds = [
-  "chmod +x build.sh",
-  "bash build.sh"
+  "python3 -m pip install --upgrade pip",
+  "python3 -m pip install --no-cache-dir -r requirements.txt"
 ]
