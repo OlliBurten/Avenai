@@ -1,0 +1,11 @@
+build:
+  builder: nixpacks
+  buildCommand: bash build.sh
+
+deploy:
+  startCommand: python3 -m uvicorn avenai_final:app --host 0.0.0.0 --port $PORT
+  healthcheckPath: /health
+
+railway:
+  buildCommand: bash build.sh
+  startCommand: python3 -m uvicorn avenai_final:app --host 0.0.0.0 --port $PORT
